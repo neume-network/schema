@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,12 @@
   "dependencies": {},
   "devDependencies": {
     "ajv": "8.11.0",
-    "ava": "4.2.0"
+    "ava": "4.2.0",
+    "husky": "7.0.4",
+    "lint-staged": "12.4.0",
+    "prettier": "2.6.2"
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
   }
 }
