@@ -2,8 +2,8 @@
 import { readFileSync } from "fs";
 
 import test from "ava";
-
 import Ajv from "ajv";
+import addFormats from "ajv-formats";
 
 import {
   version,
@@ -15,6 +15,7 @@ import {
 } from "../src/schema.mjs";
 
 const ajv = new Ajv();
+addFormats(ajv);
 
 test("generated json schema", (t) => {
   const schema = JSON.parse(readFileSync("schema.json").toString());
@@ -37,6 +38,7 @@ test("validate value", (t) => {
   const example = {
     version,
     title: "CULTURE",
+    duration: "PT2M1S",
     artist: {
       version,
       name: "latasha",

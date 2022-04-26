@@ -8,6 +8,10 @@
     "title": {
       "type": "string"
     },
+    "duration": {
+      "type": "string",
+      "format": "duration"
+    },
     "artist": {
       "type": "object",
       "properties": {

@@ -73,6 +73,11 @@ export const track = {
     title: {
       type: "string",
     },
+    duration: {
+      // Source for ABNF: https://datatracker.ietf.org/doc/html/rfc3339#appendix-A
+      type: "string",
+      format: "duration",
+    },
     artist: {
       ...artist,
     },
