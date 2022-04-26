@@ -40,6 +40,7 @@ test("validate value", (t) => {
       url: "https://www.sound.xyz",
     },
     erc721: {
+      version,
       address: "0x0000000000000000000000000000000000000000",
       tokenId: "0",
       metadata: {

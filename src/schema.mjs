@@ -38,7 +38,7 @@ export const ERC721 = {
       ...ERC721Metadata,
     },
   },
-  required: ["address", "tokenId", "metadata"],
+  required: ["version", "address", "tokenId", "metadata"],
 };
 
 export const artist = {
