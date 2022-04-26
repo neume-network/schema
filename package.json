@@ -1,0 +1,36 @@
+{
+  "name": "music-os-schema",
+  "version": "0.0.1",
+  "description": "A JSON schema for music.",
+  "main": "./src/schema.mjs",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/music-os/music-os-schema.git"
+  },
+  "keywords": [
+    "music",
+    "metadata",
+    "nfts",
+    "ddex",
+    "intellectual",
+    "property",
+    "license"
+  ],
+  "author": "Tim Daubenschütz <tim@daubenschuetz.de> (https://timdaub.github.io/)",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/music-os/music-os-schema/issues"
+  },
+  "homepage": "https://github.com/music-os/music-os-schema#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "ajv": "8.11.0",
+    "ava": "4.2.0"
+  }
+}
