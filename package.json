@@ -7,8 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "ava",
-    "prepare": "husky install"
+    "test": "npm run generate:json && ava",
+    "prepare": "husky install",
+    "generate:json": "node ./scripts/generate.mjs > schema.json"
   },
   "repository": {
     "type": "git",

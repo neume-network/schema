@@ -1,4 +1,6 @@
 //@format
+import { readFileSync } from "fs";
+
 import test from "ava";
 
 import Ajv from "ajv";
@@ -13,6 +15,11 @@ import {
 } from "../src/schema.mjs";
 
 const ajv = new Ajv();
+
+test("generated json schema", (t) => {
+  const schema = JSON.parse(readFileSync("schema.json").toString());
+  t.truthy(schema);
+});
 
 test("compile schema", (t) => {
   ajv.compile(version);
