@@ -38,13 +38,15 @@
         "name": {
           "type": "string"
         },
-        "url": {
-          "type": "string"
+        "uri": {
+          "type": "string",
+          "format": "uri"
         }
       },
       "required": [
+        "version",
         "name",
-        "url"
+        "uri"
       ]
     },
     "erc721": {
@@ -71,7 +73,8 @@
               "type": "string"
             },
             "image": {
-              "type": "string"
+              "type": "string",
+              "format": "uri"
             }
           },
           "required": [

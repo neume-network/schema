@@ -18,6 +18,7 @@ export const ERC721Metadata = {
     },
     image: {
       type: "string",
+      format: "uri",
     },
   },
   required: ["name", "description", "image"],
@@ -59,11 +60,12 @@ export const platform = {
     name: {
       type: "string",
     },
-    url: {
+    uri: {
       type: "string",
+      format: "uri",
     },
   },
-  required: ["name", "url"],
+  required: ["version", "name", "uri"],
 };
 
 export const track = {
