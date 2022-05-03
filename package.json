@@ -1,5 +1,5 @@
 {
-  "name": "music-os-schema",
+  "name": "@music-os/schema",
   "version": "0.0.1",
   "description": "A JSON schema for music.",
   "main": "./src/schema.mjs",
