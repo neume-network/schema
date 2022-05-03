@@ -157,6 +157,7 @@ test("validate value", (t) => {
       version,
       address: "0x0000000000000000000000000000000000000000",
       tokenId: "0",
+      tokenURI: "https://example.com/metadata.json",
       metadata: {
         name: "CULTURE",
         description: "song description",

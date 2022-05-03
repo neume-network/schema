@@ -63,6 +63,10 @@
         "tokenId": {
           "type": "string"
         },
+        "tokenURI": {
+          "type": "string",
+          "format": "uri"
+        },
         "metadata": {
           "type": "object",
           "properties": {
@@ -88,6 +92,7 @@
         "version",
         "address",
         "tokenId",
+        "tokenURI",
         "metadata"
       ]
     },

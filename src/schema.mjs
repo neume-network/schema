@@ -37,11 +37,15 @@ export const ERC721 = {
     tokenId: {
       type: "string",
     },
+    tokenURI: {
+      type: "string",
+      format: "uri",
+    },
     metadata: {
       ...ERC721Metadata,
     },
   },
-  required: ["version", "address", "tokenId", "metadata"],
+  required: ["version", "address", "tokenId", "tokenURI", "metadata"],
 };
 
 export const artist = {
