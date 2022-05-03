@@ -12,10 +12,37 @@ import {
   artist,
   platform,
   track,
+  manifestation,
+  manifestations,
 } from "../src/schema.mjs";
 
 const ajv = new Ajv();
 addFormats(ajv);
+
+test("validating a manifestation", (t) => {
+  const check = ajv.compile(manifestation);
+  const version = "0.0.1";
+  const example = {
+    version,
+    uri: "https://example.com/song",
+    mimetype: "audio/mp3",
+  };
+  const valid = check(example);
+  t.true(valid);
+});
+
+test("validating a manifestation with a non-registered mimetype", (t) => {
+  const check = ajv.compile(manifestation);
+  const version = "0.0.1";
+  const example = {
+    version,
+    uri: "https://example.com/song",
+    mimetype: "audio/non-existent",
+  };
+  const valid = check(example);
+  t.truthy(check.errors);
+  t.false(valid);
+});
 
 test("generated json schema", (t) => {
   const schema = JSON.parse(readFileSync("schema.json").toString());
@@ -29,6 +56,8 @@ test("compile schema", (t) => {
   ajv.compile(artist);
   ajv.compile(platform);
   ajv.compile(track);
+  ajv.compile(manifestation);
+  ajv.compile(manifestations);
   t.pass();
 });
 
@@ -70,6 +99,7 @@ test("failing to define proper duration format", (t) => {
         image: "https://example.com/image.jpg",
       },
     },
+    manifestations: [],
   };
   const valid = check(example);
   t.is(check.errors[0].params.format, "duration");
@@ -101,6 +131,7 @@ test("failing to define proper uri format", (t) => {
         image: "https://example.com/image.jpg",
       },
     },
+    manifestations: [],
   };
   const valid = check(example);
   t.is(check.errors[0].params.format, "uri");
@@ -132,6 +163,18 @@ test("validate value", (t) => {
         image: "https://example.com/image.jpg",
       },
     },
+    manifestations: [
+      {
+        version,
+        uri: "https://example.com/audio",
+        mimetype: "audio/mp3",
+      },
+      {
+        version,
+        uri: "https://example.com/video",
+        mimetype: "video/mp4",
+      },
+    ],
   };
   const valid = check(example);
   t.true(valid);

@@ -37,6 +37,7 @@
     "ava": "4.2.0",
     "husky": "7.0.4",
     "lint-staged": "12.4.0",
+    "mime-db": "1.52.0",
     "prettier": "2.6.2"
   },
   "lint-staged": {

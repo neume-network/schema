@@ -1,4 +1,6 @@
 //@format
+import mimetypes from "./mimetypes.mjs";
+
 export const version = {
   type: "string",
   // Source: https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
@@ -68,6 +70,27 @@ export const platform = {
   required: ["version", "name", "uri"],
 };
 
+export const manifestation = {
+  type: "object",
+  properties: {
+    version: { ...version },
+    uri: {
+      type: "string",
+      format: "uri",
+    },
+    mimetype: {
+      type: "string",
+      pattern: mimetypes,
+    },
+  },
+  required: ["version", "uri", "mimetype"],
+};
+
+export const manifestations = {
+  type: "array",
+  items: manifestation,
+};
+
 export const track = {
   type: "object",
   properties: {
@@ -89,6 +112,16 @@ export const track = {
     erc721: {
       ...ERC721,
     },
+    manifestations: {
+      ...manifestations,
+    },
   },
-  required: ["version", "title", "artist", "platform", "erc721"],
+  required: [
+    "manifestations",
+    "version",
+    "title",
+    "artist",
+    "platform",
+    "erc721",
+  ],
 };
