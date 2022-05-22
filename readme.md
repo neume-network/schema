@@ -1,13 +1,13 @@
-# music-os-schema
+# neume-network-schema
 
-The normalized schema for metadata of music-os defined as JSON schema.
+The normalized schema for metadata of neume-network defined as JSON schema.
 
 ## Usage
 
 **via npm:**
 
 ```
-npm i @music-os/schema
+npm i @neume-network/schema
 ```
 
 **or if you're using other languages, integrate the Git repository and use `./schema.json`.**

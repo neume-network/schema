@@ -1,5 +1,5 @@
 {
-  "name": "@music-os/schema",
+  "name": "@neume-network/schema",
   "version": "0.1.0",
   "description": "A JSON schema for music.",
   "main": "./src/schema.mjs",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/music-os/music-os-schema.git"
+    "url": "git+https://github.com/neume-network/schema.git"
   },
   "keywords": [
     "music",
@@ -27,9 +27,9 @@
   "author": "Tim Daubenschütz <tim@daubenschuetz.de> (https://timdaub.github.io/)",
   "license": "LGPL-3.0-only",
   "bugs": {
-    "url": "https://github.com/music-os/music-os-schema/issues"
+    "url": "https://github.com/neume-network/schema/issues"
   },
-  "homepage": "https://github.com/music-os/music-os-schema#readme",
+  "homepage": "https://github.com/neume-network/schema#readme",
   "dependencies": {},
   "devDependencies": {
     "ajv": "8.11.0",
