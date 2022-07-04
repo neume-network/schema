@@ -31,7 +31,7 @@ test("validating a manifestation", (t) => {
   t.true(valid);
 });
 
-test("validating a manifestation with a non-registered mimetype", (t) => {
+test.skip("validating a manifestation with a non-registered mimetype", (t) => {
   const check = ajv.compile(manifestation);
   const version = "0.0.1";
   const example = {
