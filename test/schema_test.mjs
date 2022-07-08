@@ -91,6 +91,7 @@ test("failing to define proper duration format", (t) => {
     },
     erc721: {
       version,
+      createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
       tokenId: "0",
       metadata: {
@@ -123,6 +124,7 @@ test("failing to define proper uri format", (t) => {
     },
     erc721: {
       version,
+      createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
       tokenId: "0",
       metadata: {
@@ -155,6 +157,7 @@ test("validate value", (t) => {
     },
     erc721: {
       version,
+      createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
       tokenId: "0",
       tokenURI: "https://example.com/metadata.json",

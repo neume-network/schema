@@ -30,6 +30,15 @@ export const ERC721 = {
   type: "object",
   properties: {
     version: { ...version },
+    createdAt: {
+      oneOf: [
+        {
+          $comment: "Referring to Ethereum block numbers",
+          type: "integer",
+          minimum: 0,
+        },
+      ],
+    },
     address: {
       type: "string",
       pattern: "0x[a-fA-F0-9]{40}",
@@ -45,7 +54,14 @@ export const ERC721 = {
       ...ERC721Metadata,
     },
   },
-  required: ["version", "address", "tokenId", "tokenURI", "metadata"],
+  required: [
+    "version",
+    "createdAt",
+    "address",
+    "tokenId",
+    "tokenURI",
+    "metadata",
+  ],
 };
 
 export const artist = {
