@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0
+
+- (breaking) Require `track.erc721.createdAt` as e.g. the Ethereum block number
+  a song was registered on-chain.
+
 ## 0.2.0
 
 - Re-release under `@neume-network/schema`
