@@ -1,6 +1,39 @@
 //@format
 import mimetypes from "./mimetypes.mjs";
 
+export const config = {
+  type: "object",
+  properties: {
+    endpoints: {
+      type: "object",
+      propertyNames: {
+        format: "uri",
+      },
+      patternProperties: {
+        "^.*$": {
+          type: "object",
+          properties: {
+            requestsPerUnit: {
+              type: "number",
+            },
+            unit: {
+              enum: ["second", "minute", "hour", "day"],
+            },
+            timeout: {
+              type: "number",
+            },
+          },
+          dependencies: {
+            requestsPerUnit: ["unit"],
+            unit: ["requestsPerUnit"],
+          },
+          additionalProperties: false,
+        },
+      },
+    },
+  },
+};
+
 export const version = {
   type: "string",
   // Source: https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string

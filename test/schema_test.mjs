@@ -14,6 +14,7 @@ import {
   track,
   manifestation,
   manifestations,
+  config,
 } from "../src/schema.mjs";
 
 const ajv = new Ajv();
@@ -58,6 +59,7 @@ test("compile schema", (t) => {
   ajv.compile(track);
   ajv.compile(manifestation);
   ajv.compile(manifestations);
+  ajv.compile(config);
   t.pass();
 });
 
@@ -180,6 +182,22 @@ test("validate value", (t) => {
       },
     ],
   };
+  const valid = check(example);
+  t.true(valid);
+});
+
+test("should be a valid config", (t) => {
+  const check = ajv.compile(config);
+  const example = {
+    endpoints: {
+      "https://eth-mainnet.alchemyapi.io": {
+        timeout: 3000,
+        requestsPerUnit: 100,
+        unit: "second",
+      },
+    },
+  };
+
   const valid = check(example);
   t.true(valid);
 });
