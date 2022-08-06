@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1
+
+- Adds `config` object that allows to define `endpoints` for timeout and
+  rate-limiting control.
+
 ## 0.3.0
 
 - (breaking) Require `track.erc721.createdAt` as e.g. the Ethereum block number
