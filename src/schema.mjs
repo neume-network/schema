@@ -178,3 +178,25 @@ export const track = {
     "erc721",
   ],
 };
+
+export const crawlPath = {
+  type: "array",
+  minItems: 1,
+  items: {
+    type: "array",
+    items: {
+      type: "object",
+      properties: {
+        name: { type: "string" },
+        extractor: {
+          type: "object",
+          properties: {
+            args: { type: "array" },
+          },
+        },
+        transformer: { type: "object" },
+      },
+      required: ["name"],
+    },
+  },
+};

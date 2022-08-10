@@ -15,6 +15,7 @@ import {
   manifestation,
   manifestations,
   config,
+  crawlPath,
 } from "../src/schema.mjs";
 
 const ajv = new Ajv();
@@ -197,6 +198,41 @@ test("should be a valid config", (t) => {
       },
     },
   };
+
+  const valid = check(example);
+  t.true(valid);
+});
+
+test("should be a valid crawlPath", (t) => {
+  const check = ajv.compile(crawlPath);
+  const example = [
+    [
+      {
+        name: "web3subgraph",
+        extractor: {},
+        transformer: {},
+      },
+    ],
+    [
+      {
+        name: "soundxyz-call-tokenuri",
+        extractor: {
+          args: ["web3subgraph-transformation"],
+        },
+        transformer: {},
+      },
+      {
+        name: "zora-call-tokenuri",
+        extractor: {
+          args: ["web3subgraph-transformation"],
+        },
+      },
+      {
+        name: "zora-call-tokenmetadatauri",
+        transformer: {},
+      },
+    ],
+  ];
 
   const valid = check(example);
   t.true(valid);
