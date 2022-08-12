@@ -72,6 +72,11 @@ export const ERC721 = {
         },
       ],
     },
+    owner: {
+      type: "string",
+      pattern: "0x[a-fA-F0-9]{40}",
+      $comment: "EIP-173 or EIP-5313 owner of the collection's contract.",
+    },
     address: {
       type: "string",
       pattern: "0x[a-fA-F0-9]{40}",
@@ -94,6 +99,7 @@ export const ERC721 = {
     "tokenId",
     "tokenURI",
     "metadata",
+    "owner",
   ],
 };
 

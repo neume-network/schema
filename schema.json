@@ -65,6 +65,11 @@
             }
           ]
         },
+        "owner": {
+          "type": "string",
+          "pattern": "0x[a-fA-F0-9]{40}",
+          "$comment": "EIP-173 or EIP-5313 owner of the collection's contract."
+        },
         "address": {
           "type": "string",
           "pattern": "0x[a-fA-F0-9]{40}"
@@ -103,7 +108,8 @@
         "address",
         "tokenId",
         "tokenURI",
-        "metadata"
+        "metadata",
+        "owner"
       ]
     },
     "manifestations": {

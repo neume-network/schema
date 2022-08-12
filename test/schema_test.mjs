@@ -162,6 +162,7 @@ test("validate value", (t) => {
       version,
       createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
+      owner: "0x0000000000000000000000000000000000001337",
       tokenId: "0",
       tokenURI: "https://example.com/metadata.json",
       metadata: {
