@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0
+
+- (breaking): `erc721.owner` must be a Ethereum-compatible address
+- Package exports `crawlPath` schema, thx @il3ven
+
 ## 0.3.1
 
 - Adds `config` object that allows to define `endpoints` for timeout and
