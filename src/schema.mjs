@@ -4,6 +4,17 @@ import mimetypes from "./mimetypes.mjs";
 export const config = {
   type: "object",
   properties: {
+    queue: {
+      type: "object",
+      properties: {
+        options: {
+          type: "object",
+          properties: {
+            concurrent: { type: "number" },
+          },
+        },
+      },
+    },
     endpoints: {
       type: "object",
       propertyNames: {

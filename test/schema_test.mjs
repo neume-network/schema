@@ -191,6 +191,11 @@ test("validate value", (t) => {
 test("should be a valid config", (t) => {
   const check = ajv.compile(config);
   const example = {
+    queue: {
+      options: {
+        concurrent: 10,
+      },
+    },
     endpoints: {
       "https://eth-mainnet.alchemyapi.io": {
         timeout: 3000,
