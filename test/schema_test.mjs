@@ -209,6 +209,27 @@ test("should be a valid config", (t) => {
   t.true(valid);
 });
 
+test("should be an invalid config", (t) => {
+  const check = ajv.compile(config);
+  const example = {
+    queue: {
+      options: {
+        // concurrent options is required but missing here
+      },
+    },
+    endpoints: {
+      "https://eth-mainnet.alchemyapi.io": {
+        timeout: 3000,
+        requestsPerUnit: 100,
+        unit: "second",
+      },
+    },
+  };
+
+  const valid = check(example);
+  t.false(valid);
+});
+
 test("should be a valid crawlPath", (t) => {
   const check = ajv.compile(crawlPath);
   const example = [
