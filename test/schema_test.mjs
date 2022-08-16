@@ -61,6 +61,7 @@ test("compile schema", (t) => {
   ajv.compile(manifestation);
   ajv.compile(manifestations);
   ajv.compile(config);
+  ajv.compile(crawlPath);
   t.pass();
 });
 
