@@ -3,7 +3,21 @@ import mimetypes from "./mimetypes.mjs";
 
 export const config = {
   type: "object",
+  required: ["queue"],
   properties: {
+    queue: {
+      type: "object",
+      required: ["options"],
+      properties: {
+        options: {
+          type: "object",
+          required: ["concurrent"],
+          properties: {
+            concurrent: { type: "integer" },
+          },
+        },
+      },
+    },
     endpoints: {
       type: "object",
       propertyNames: {
