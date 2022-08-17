@@ -13,7 +13,7 @@ export const config = {
           type: "object",
           required: ["concurrent"],
           properties: {
-            concurrent: { type: "number" },
+            concurrent: { type: "integer" },
           },
         },
       },
