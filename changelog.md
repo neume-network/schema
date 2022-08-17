@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.0
+
+- (breaking): `config` schema now requires mandatory property
+  `queue.options.concurrent` of type `integer`.
+
 ## 0.4.0
 
 - (breaking): `erc721.owner` must be a Ethereum-compatible address
