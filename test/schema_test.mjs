@@ -257,7 +257,9 @@ test("should be a valid crawlPath", (t) => {
       },
       {
         name: "zora-call-tokenmetadatauri",
-        transformer: {},
+        transformer: {
+          args: ["path/to/file", "arg1"],
+        },
       },
     ],
   ];
