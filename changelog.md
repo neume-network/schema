@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.1
+
+- The `crawlPath`'s `transformer` property now allows passing a list of
+  arguments.
+
 ## 0.5.0
 
 - (breaking): `config` schema now requires mandatory property
