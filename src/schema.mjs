@@ -356,7 +356,17 @@ export const crawlPath = {
             args: { type: "array" },
           },
         },
-        transformer: { type: "object" },
+        transformer: {
+          type: "object",
+          properties: {
+            args: {
+              type: "array",
+              minItems: 1,
+              items: [{ type: "string" }],
+              additionalItems: true,
+            },
+          },
+        },
       },
       required: ["name"],
     },
