@@ -267,3 +267,26 @@ test("should be a valid crawlPath", (t) => {
   const valid = check(example);
   t.true(valid);
 });
+
+test("if crawl path validator throws if transformer.args[0] isn't a string", (t) => {
+  // NOTE: We implicitly encode the first argument as the path to a file that
+  // the transformer processes so it has to be a string.
+  const check = ajv.compile(crawlPath);
+  const notAString = 1234;
+  const example = [
+    [
+      {
+        name: "web3subgraph",
+        transformer: {
+          args: [notAString, notAString]
+
+        },
+      },
+    ],
+  ];
+
+  const valid = check(example);
+  t.false(valid);
+  t.true(check.errors[0].instancePath.includes("transformer/args/0"));
+  t.is(check.errors[0].message, "must be string");
+});
