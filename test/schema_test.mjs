@@ -143,6 +143,48 @@ test("failing to define proper uri format", (t) => {
   t.is(check.errors[0].params.format, "uri");
 });
 
+test("should fail when no manifestation with audio related mimetype is present", (t) => {
+  const check = ajv.compile(track);
+  const version = "0.0.1";
+  const example = {
+    version,
+    title: "CULTURE",
+    duration: "PT2M1S",
+    artist: {
+      version,
+      name: "latasha",
+    },
+    platform: {
+      version,
+      name: "Sound",
+      uri: "https://www.sound.xyz",
+    },
+    erc721: {
+      version,
+      createdAt: 123,
+      address: "0x0000000000000000000000000000000000000000",
+      owner: "0x0000000000000000000000000000000000001337",
+      tokenId: "0",
+      tokenURI: "https://example.com/metadata.json",
+      metadata: {
+        name: "CULTURE",
+        description: "song description",
+        image: "https://example.com/image.jpg",
+      },
+    },
+    manifestations: [
+      {
+        version,
+        uri: "https://example.com/video",
+        mimetype: "video/mp4",
+      },
+    ],
+  };
+  const valid = check(example);
+  t.is(check.errors[0].keyword, "contains");
+  t.false(valid);
+});
+
 test("validate value", (t) => {
   const check = ajv.compile(track);
   const version = "0.0.1";
@@ -278,8 +320,7 @@ test("if crawl path validator throws if transformer.args[0] isn't a string", (t)
       {
         name: "web3subgraph",
         transformer: {
-          args: [notAString, notAString]
-
+          args: [notAString, notAString],
         },
       },
     ],

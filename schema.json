@@ -135,6 +135,14 @@
           "uri",
           "mimetype"
         ]
+      },
+      "contains": {
+        "type": "object",
+        "properties": {
+          "mimetype": {
+            "pattern": "audio"
+          }
+        }
       }
     }
   },

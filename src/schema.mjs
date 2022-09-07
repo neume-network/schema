@@ -304,6 +304,14 @@ export const manifestation = {
 export const manifestations = {
   type: "array",
   items: manifestation,
+  contains: {
+    type: "object",
+    properties: {
+      mimetype: {
+        pattern: "audio",
+      },
+    },
+  },
 };
 
 export const track = {
