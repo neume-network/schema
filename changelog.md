@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0
+
+- In track schema, require at least one manifestation to be present where
+  `mimetype` contains the keyword `audio` to ensure that any track always has
+  an audio file included.
+
 ## 0.5.1
 
 - The `crawlPath`'s `transformer` property now allows passing a list of
