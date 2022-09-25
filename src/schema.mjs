@@ -125,6 +125,47 @@ export const jsonrpc = {
   ],
 };
 
+export const ipfs = {
+  type: "object",
+  properties: {
+    type: {
+      type: "string",
+      enum: ["ipfs"],
+    },
+    commissioner: {
+      type: "string",
+    },
+    version: {
+      type: "string",
+    },
+    options: {
+      type: "object",
+      properties: {
+        timeout: {
+          $comment: "temporal unit is milliseconds",
+          type: "integer",
+        },
+        url: { type: "string" },
+        gateway: {
+          type: "string",
+          pattern: "^.+ipfs/$",
+          $comment: "http gateway for ipfs should end with ipfs/",
+        },
+      },
+      required: ["url", "gateway"],
+    },
+    results: {
+      type: "object",
+      nullable: true,
+    },
+    error: {
+      type: "string",
+      nullable: true,
+    },
+  },
+  required: ["type", "commissioner", "version", "error", "results", "options"],
+};
+
 export const exit = {
   type: "object",
   required: ["type", "version"],
@@ -140,7 +181,7 @@ export const exit = {
 };
 
 export const workerMessage = {
-  oneOf: [https, graphql, jsonrpc, exit],
+  oneOf: [https, graphql, jsonrpc, ipfs, exit],
 };
 
 export const config = {

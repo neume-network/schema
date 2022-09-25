@@ -16,6 +16,7 @@ import {
   manifestations,
   config,
   crawlPath,
+  ipfs,
 } from "../src/schema.mjs";
 
 const ajv = new Ajv();
@@ -330,4 +331,41 @@ test("if crawl path validator throws if transformer.args[0] isn't a string", (t)
   t.false(valid);
   t.true(check.errors[0].instancePath.includes("transformer/args/0"));
   t.is(check.errors[0].message, "must be string");
+});
+
+test("should be a valid ipfs message", async (t) => {
+  const check = ajv.compile(ipfs);
+  const message = {
+    options: {
+      url: "ipfs://Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu",
+      gateway: `https://ipfs.io/ipfs/`,
+    },
+    version: "1.0.0",
+    type: "ipfs",
+    commissioner: "test",
+    results: null,
+    error: null,
+  };
+
+  const valid = check(message);
+  t.true(valid);
+});
+
+test("ipfs message url should end with ipfs/", async (t) => {
+  const check = ajv.compile(ipfs);
+  const message = {
+    options: {
+      url: "ipfs://Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu",
+      gateway: `https://ipfs.io/`,
+    },
+    version: "1.0.0",
+    type: "ipfs",
+    commissioner: "test",
+    results: null,
+    error: null,
+  };
+
+  const valid = check(message);
+  t.false(valid);
+  t.true(check.errors[0].instancePath.includes("/options/gateway"));
 });
