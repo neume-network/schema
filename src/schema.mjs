@@ -30,14 +30,12 @@ export const https = {
     },
     results: {
       type: "object",
-      nullable: true
     },
     error: {
       type: "string",
-      nullable: true
-    }
+    },
   },
-  required: ["type", "commissioner", "version", "error", "results", "options"]
+  required: ["type", "commissioner", "version", "options"],
 };
 
 export const graphql = {
@@ -64,14 +62,12 @@ export const graphql = {
     },
     results: {
       type: "object",
-      nullable: true
     },
     error: {
       type: "string",
-      nullable: true
-    }
+    },
   },
-  required: ["type", "commissioner", "version", "options", "results", "error"]
+  required: ["type", "commissioner", "version", "options"],
 };
 
 export const jsonrpc = {
@@ -106,20 +102,16 @@ export const jsonrpc = {
     },
     results: {
       type: "object",
-      nullable: true
     },
     error: {
       type: "string",
-      nullable: true
     }
   },
-  // TODO: Require `error`
   required: [
     "type",
     "commissioner",
     "method",
     "params",
-    "results",
     "version",
     "options"
   ]
@@ -157,14 +149,12 @@ export const ipfs = {
     },
     results: {
       type: "object",
-      nullable: true
     },
     error: {
       type: "string",
-      nullable: true
     }
   },
-  required: ["type", "commissioner", "version", "error", "results", "options"]
+  required: ["type", "commissioner", "version", "options"]
 };
 
 export const exit = {

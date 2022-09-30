@@ -343,8 +343,6 @@ test("should be a valid ipfs message", async (t) => {
     version: "1.0.0",
     type: "ipfs",
     commissioner: "test",
-    results: null,
-    error: null,
   };
 
   const valid = check(message);
@@ -361,8 +359,6 @@ test("ipfs gateway is a https url", async (t) => {
     version: "1.0.0",
     type: "ipfs",
     commissioner: "test",
-    results: null,
-    error: null,
   };
 
   const valid = check(message);
@@ -380,8 +376,6 @@ test("ipfs message url should end with ipfs/", async (t) => {
     version: "1.0.0",
     type: "ipfs",
     commissioner: "test",
-    results: null,
-    error: null,
   };
 
   const valid = check(message);
