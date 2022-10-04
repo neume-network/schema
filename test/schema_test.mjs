@@ -351,6 +351,25 @@ test("should be a valid ipfs message", async (t) => {
   t.true(valid);
 });
 
+test("ipfs gateway is a https url", async (t) => {
+  const check = ajv.compile(ipfs);
+  const message = {
+    options: {
+      uri: "ipfs://Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu",
+      gateway: `bitcoin://abc`,
+    },
+    version: "1.0.0",
+    type: "ipfs",
+    commissioner: "test",
+    results: null,
+    error: null,
+  };
+
+  const valid = check(message);
+  t.false(valid);
+  t.true(check.errors[0].instancePath.includes("/options/gateway"));
+});
+
 test("ipfs message url should end with ipfs/", async (t) => {
   const check = ajv.compile(ipfs);
   const message = {
