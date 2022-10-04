@@ -145,14 +145,14 @@ export const ipfs = {
           $comment: "temporal unit is milliseconds",
           type: "integer",
         },
-        url: { type: "string" },
+        uri: { type: "string" },
         gateway: {
           type: "string",
           pattern: "^.+ipfs/$",
           $comment: "http gateway for ipfs should end with ipfs/",
         },
       },
-      required: ["url", "gateway"],
+      required: ["uri", "gateway"],
     },
     results: {
       type: "object",

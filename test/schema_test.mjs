@@ -337,7 +337,7 @@ test("should be a valid ipfs message", async (t) => {
   const check = ajv.compile(ipfs);
   const message = {
     options: {
-      url: "ipfs://Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu",
+      uri: "ipfs://Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu",
       gateway: `https://ipfs.io/ipfs/`,
     },
     version: "1.0.0",
@@ -355,7 +355,7 @@ test("ipfs message url should end with ipfs/", async (t) => {
   const check = ajv.compile(ipfs);
   const message = {
     options: {
-      url: "ipfs://Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu",
+      uri: "ipfs://Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu",
       gateway: `https://ipfs.io/`,
     },
     version: "1.0.0",
