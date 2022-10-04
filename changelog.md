@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.1
+
+- Add IPFS message schema type
+
 ## 0.6.0
 
 - In track schema, require at least one manifestation to be present where
