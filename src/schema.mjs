@@ -194,6 +194,7 @@ export const arweave = {
         gateway: {
           type: "string",
           format: "uri",
+          pattern: "^https://",
         },
       },
       required: ["uri", "gateway"],
