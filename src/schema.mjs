@@ -21,7 +21,11 @@ export const https = {
           $comment: "temporal unit is milliseconds",
           type: "integer",
         },
-        url: { type: "string" },
+        url: {
+          type: "string",
+          format: "uri",
+          pattern: "https://",
+        },
         method: { type: "string" },
         body: { type: "string" },
         headers: { type: "object" },
@@ -29,13 +33,13 @@ export const https = {
       required: ["url", "method"],
     },
     results: {
-      type: "object"
+      type: "object",
     },
     error: {
-      type: "string"
-    }
+      type: "string",
+    },
   },
-  required: ["type", "commissioner", "version", "options"]
+  required: ["type", "commissioner", "version", "options"],
 };
 
 export const graphql = {
@@ -54,20 +58,24 @@ export const graphql = {
     options: {
       type: "object",
       properties: {
-        url: { type: "string" },
+        url: {
+          type: "string",
+          format: "uri",
+          pattern: "^https://",
+        },
         body: { type: "string" },
         headers: { type: "object" },
       },
       required: ["url", "body"],
     },
     results: {
-      type: "object"
+      type: "object",
     },
     error: {
-      type: "string"
-    }
+      type: "string",
+    },
   },
-  required: ["type", "commissioner", "version", "options"]
+  required: ["type", "commissioner", "version", "options"],
 };
 
 export const jsonrpc = {
@@ -90,7 +98,11 @@ export const jsonrpc = {
           $comment: "temporal unit is milliseconds",
           type: "integer",
         },
-        url: { type: "string" },
+        url: {
+          type: "string",
+          format: "uri",
+          pattern: "^https://",
+        },
       },
       required: ["url"],
     },
@@ -101,7 +113,7 @@ export const jsonrpc = {
       type: "array",
     },
     results: {
-      type: "object"
+      type: "object",
     },
     error: {
       type: "string",
@@ -130,9 +142,13 @@ export const ipfs = {
           $comment: "temporal unit is milliseconds",
           type: "integer",
         },
-        uri: { type: "string" },
+        uri: {
+          type: "string",
+          format: "uri",
+        },
         gateway: {
           type: "string",
+          format: "uri",
           pattern: "^https?://[^/]+/(ip[fn]s)/",
           $comment:
             "Must equate to a regular IPFS path gateway. We had initially considered supporting subdomain gateways too, but a lack of expressing their URIs generically lead us ignore their support.",
@@ -141,7 +157,7 @@ export const ipfs = {
       required: ["uri", "gateway"],
     },
     results: {
-      type: "object"
+      type: "object",
     },
     error: {
       type: "string",
@@ -172,6 +188,7 @@ export const arweave = {
         },
         uri: {
           type: "string",
+          format: "uri",
           pattern: "ar://[a-zA-Z0-9-_]{43}.*",
         },
         gateway: {
@@ -186,9 +203,9 @@ export const arweave = {
     },
     error: {
       type: "string",
-    }
+    },
   },
-  required: ["type", "commissioner", "version", "options"]
+  required: ["type", "commissioner", "version", "options"],
 };
 
 export const exit = {
@@ -288,7 +305,7 @@ export const ERC721 = {
     createdAt: {
       $comment: "Referring to Ethereum block numbers",
       type: "integer",
-      minimum: 0
+      minimum: 0,
     },
     owner: {
       type: "string",
@@ -371,10 +388,10 @@ export const manifestations = {
     properties: {
       mimetype: {
         type: "string",
-        pattern: "audio"
-      }
-    }
-  }
+        pattern: "audio",
+      },
+    },
+  },
 };
 
 export const track = {
@@ -423,12 +440,12 @@ export const crawlPath = {
         name: { type: "string" },
         extractor: {
           type: "object",
-          additionalProperties: true
+          additionalProperties: true,
         },
         transformer: {
           type: "object",
-          additionalProperties: true
-        }
+          additionalProperties: true,
+        },
       },
       required: ["name"],
     },
