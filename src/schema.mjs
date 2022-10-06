@@ -179,7 +179,7 @@ export const arweave = {
         },
         uri: { 
           type: "string",
-          pattern: "ar:\/\/"
+          pattern: "[a-zA-Z0-9-_]{43}",
         }
       },
       required: ["uri"]
