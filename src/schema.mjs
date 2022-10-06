@@ -157,6 +157,43 @@ export const ipfs = {
   required: ["type", "commissioner", "version", "options"]
 };
 
+export const arweave = {
+  type: "object",
+  properties: {
+    type: {
+      type: "string",
+      enum: ["arweave"]
+    },
+    commissioner: {
+      type: "string"
+    },
+    version: {
+      type: "string"
+    },
+    options: {
+      type: "object",
+      properties: {
+        timeout: {
+          $comment: "temporal unit is milliseconds",
+          type: "integer"
+        },
+        uri: { 
+          type: "string",
+          pattern: "ar:\/\/[a-zA-Z0-9-_]{43}.*"
+        }
+      },
+      required: ["uri"]
+    },
+    results: {
+      type: "object",
+    },
+    error: {
+      type: "string",
+    }
+  },
+  required: ["type", "commissioner", "version", "options"]
+};
+
 export const exit = {
   type: "object",
   required: ["type", "version"],
