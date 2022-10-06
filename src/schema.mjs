@@ -206,7 +206,7 @@ export const exit = {
 };
 
 export const workerMessage = {
-  oneOf: [https, graphql, jsonrpc, ipfs, exit],
+  oneOf: [https, graphql, jsonrpc, ipfs, arweave, exit],
 };
 
 export const config = {
