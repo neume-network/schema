@@ -174,8 +174,12 @@ export const arweave = {
           type: "string",
           pattern: "ar://[a-zA-Z0-9-_]{43}.*",
         },
+        gateway: {
+          type: "string",
+          format: "uri",
+        },
       },
-      required: ["uri"],
+      required: ["uri", "gateway"],
     },
     results: {
       type: "object",
@@ -202,7 +206,7 @@ export const exit = {
 };
 
 export const workerMessage = {
-  oneOf: [https, graphql, jsonrpc, ipfs, exit],
+  oneOf: [https, graphql, jsonrpc, ipfs, arweave, exit],
 };
 
 export const config = {
