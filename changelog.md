@@ -1,14 +1,19 @@
 # Changelog
 
+## 0.7.0
+
+- (breaking) For all extraction worker messages, the properties `results` and
+  `error` are now optional but they can't be `null`ed anymore.
+
 ## 0.6.1
 
 - Add IPFS message schema type
 
 ## 0.6.0
 
-- In track schema, require at least one manifestation to be present where
-  `mimetype` contains the keyword `audio` to ensure that any track always has
-  an audio file included.
+- (breaking) In track schema, require at least one manifestation to be present
+  where `mimetype` contains the keyword `audio` to ensure that any track always
+  has an audio file included.
 
 ## 0.5.1
 
