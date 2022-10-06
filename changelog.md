@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.1
+
+- Stop validating `transformer.args` and `extractor.args` as it isn't possible
+  without triggering excessive warning logs from AJV.
+- Remove false usage of `oneOf` in `track.erc721.createdAt`.
+
 ## 0.7.0
 
 - (breaking) For all extraction worker messages, the properties `results` and
