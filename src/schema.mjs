@@ -176,7 +176,7 @@ export const arweave = {
         },
         gateway: {
           type: "string",
-          pattern: "^https?:\/\/[a-zA-Z0-9-.]{0,}(arweave)[a-zA-Z0-9-.]{0,}\/",
+          format: "uri"
         }
       },
       required: ["uri", "gateway"]
