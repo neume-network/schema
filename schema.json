@@ -121,6 +121,7 @@
         "type": "object",
         "properties": {
           "mimetype": {
+            "type": "string",
             "pattern": "audio"
           }
         }

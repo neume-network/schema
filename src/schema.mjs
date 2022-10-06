@@ -370,10 +370,11 @@ export const manifestations = {
     type: "object",
     properties: {
       mimetype: {
-        pattern: "audio",
-      },
-    },
-  },
+        type: "string",
+        pattern: "audio"
+      }
+    }
+  }
 };
 
 export const track = {
@@ -422,21 +423,12 @@ export const crawlPath = {
         name: { type: "string" },
         extractor: {
           type: "object",
-          properties: {
-            args: { type: "array" },
-          },
+          additionalProperties: true
         },
         transformer: {
           type: "object",
-          properties: {
-            args: {
-              type: "array",
-              minItems: 1,
-              items: [{ type: "string" }],
-              additionalItems: true,
-            },
-          },
-        },
+          additionalProperties: true
+        }
       },
       required: ["name"],
     },
