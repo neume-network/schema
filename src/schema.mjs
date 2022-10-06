@@ -172,14 +172,14 @@ export const arweave = {
         },
         uri: {
           type: "string",
-          pattern: "ar:\/\/[a-zA-Z0-9-_]{43}.*"
+          pattern: "ar://[a-zA-Z0-9-_]{43}.*",
         },
         gateway: {
           type: "string",
-          format: "uri"
-        }
+          format: "uri",
+        },
       },
-      required: ["uri", "gateway"]
+      required: ["uri", "gateway"],
     },
     results: {
       type: "object",
