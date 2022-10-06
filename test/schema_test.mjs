@@ -389,6 +389,7 @@ test("should be a valid arweave message", async (t) => {
   const message = {
     options: {
       uri: "ar://ltmVC0dpe7_KxFHj0-S7mdvXSfmcJOec4_OfjwSzLRk/1",
+      gateway: "https://arweave.net/"
     },
     version: "1.0.0",
     type: "arweave",
@@ -397,4 +398,20 @@ test("should be a valid arweave message", async (t) => {
 
   const valid = check(message);
   t.true(valid);
+});
+
+test("arweave gateway should be a https url", async (t) => {
+  const check = ajv.compile(arweave);
+  const message = {
+    options: {
+      uri: "ar://ltmVC0dpe7_KxFHj0-S7mdvXSfmcJOec4_OfjwSzLRk/1",
+      gateway: "arweave.net/"
+    },
+    version: "1.0.0",
+    type: "arweave",
+    commissioner: "test",
+  };
+
+  const invalid = check(message);
+  t.falsy(invalid);
 });
