@@ -9,7 +9,8 @@
   "scripts": {
     "test": "npm run generate:json && ava",
     "prepare": "husky install",
-    "generate:json": "node ./scripts/generate.mjs > schema.json"
+    "generate:json": "node ./scripts/generate.mjs > schema.json",
+    "prettier": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,6 @@
     "prettier": "2.6.2"
   },
   "lint-staged": {
-    "*.{js,css,md}": "prettier --write"
+    "*.{mjs,js,css,md}": "npm run prettier"
   }
 }
