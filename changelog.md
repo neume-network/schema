@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.8.0
+
+- Add `arweave` extraction worker message.
+- (breaking) `https.options.url` must now be `format: uri` and start with
+  `https://`.
+- (breaking) `graphql.options.url` must now be `format: uri` and start with
+  `https://`.
+- (breaking) `jsonrpc.options.url` must now be `format: uri` and start with
+  `https://`.
+- (breaking) `ipfs.options.url` must now be `format: uri`.
+- (breaking) `ipfs.options.gateway` must now be `format: uri`.
+- (breaking) `manifestations[0].mimetype.type` must now be `string`.
+
 ## 0.7.1
 
 - Stop validating `transformer.args` and `extractor.args` as it isn't possible
