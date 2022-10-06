@@ -6,27 +6,27 @@ export const https = {
   properties: {
     type: {
       type: "string",
-      enum: ["https"]
+      enum: ["https"],
     },
     commissioner: {
-      type: "string"
+      type: "string",
     },
     version: {
-      type: "string"
+      type: "string",
     },
     options: {
       type: "object",
       properties: {
         timeout: {
           $comment: "temporal unit is milliseconds",
-          type: "integer"
+          type: "integer",
         },
         url: { type: "string" },
         method: { type: "string" },
         body: { type: "string" },
-        headers: { type: "object" }
+        headers: { type: "object" },
       },
-      required: ["url", "method"]
+      required: ["url", "method"],
     },
     results: {
       type: "object",
@@ -43,22 +43,22 @@ export const graphql = {
   properties: {
     type: {
       type: "string",
-      enum: ["graphql"]
+      enum: ["graphql"],
     },
     commissioner: {
-      type: "string"
+      type: "string",
     },
     version: {
-      type: "string"
+      type: "string",
     },
     options: {
       type: "object",
       properties: {
         url: { type: "string" },
         body: { type: "string" },
-        headers: { type: "object" }
+        headers: { type: "object" },
       },
-      required: ["url", "body"]
+      required: ["url", "body"],
     },
     results: {
       type: "object",
@@ -75,46 +75,39 @@ export const jsonrpc = {
   properties: {
     type: {
       type: "string",
-      enum: ["json-rpc"]
+      enum: ["json-rpc"],
     },
     commissioner: {
-      type: "string"
+      type: "string",
     },
     version: {
-      type: "string"
+      type: "string",
     },
     options: {
       type: "object",
       properties: {
         timeout: {
           $comment: "temporal unit is milliseconds",
-          type: "integer"
+          type: "integer",
         },
-        url: { type: "string" }
+        url: { type: "string" },
       },
-      required: ["url"]
+      required: ["url"],
     },
     method: {
-      type: "string"
+      type: "string",
     },
     params: {
-      type: "array"
+      type: "array",
     },
     results: {
       type: "object",
     },
     error: {
       type: "string",
-    }
+    },
   },
-  required: [
-    "type",
-    "commissioner",
-    "method",
-    "params",
-    "version",
-    "options"
-  ]
+  required: ["type", "commissioner", "method", "params", "version", "options"],
 };
 
 export const ipfs = {
@@ -122,39 +115,39 @@ export const ipfs = {
   properties: {
     type: {
       type: "string",
-      enum: ["ipfs"]
+      enum: ["ipfs"],
     },
     commissioner: {
-      type: "string"
+      type: "string",
     },
     version: {
-      type: "string"
+      type: "string",
     },
     options: {
       type: "object",
       properties: {
         timeout: {
           $comment: "temporal unit is milliseconds",
-          type: "integer"
+          type: "integer",
         },
         uri: { type: "string" },
         gateway: {
           type: "string",
-          pattern: "^https?:\/\/[^/]+\/(ip[fn]s)\/",
+          pattern: "^https?://[^/]+/(ip[fn]s)/",
           $comment:
-            "Must equate to a regular IPFS path gateway. We had initially considered supporting subdomain gateways too, but a lack of expressing their URIs generically lead us ignore their support."
-        }
+            "Must equate to a regular IPFS path gateway. We had initially considered supporting subdomain gateways too, but a lack of expressing their URIs generically lead us ignore their support.",
+        },
       },
-      required: ["uri", "gateway"]
+      required: ["uri", "gateway"],
     },
     results: {
       type: "object",
     },
     error: {
       type: "string",
-    }
+    },
   },
-  required: ["type", "commissioner", "version", "options"]
+  required: ["type", "commissioner", "version", "options"],
 };
 
 export const arweave = {
@@ -162,22 +155,22 @@ export const arweave = {
   properties: {
     type: {
       type: "string",
-      enum: ["arweave"]
+      enum: ["arweave"],
     },
     commissioner: {
-      type: "string"
+      type: "string",
     },
     version: {
-      type: "string"
+      type: "string",
     },
     options: {
       type: "object",
       properties: {
         timeout: {
           $comment: "temporal unit is milliseconds",
-          type: "integer"
+          type: "integer",
         },
-        uri: { 
+        uri: {
           type: "string",
           pattern: "ar:\/\/[a-zA-Z0-9-_]{43}.*"
         },
@@ -193,9 +186,9 @@ export const arweave = {
     },
     error: {
       type: "string",
-    }
+    },
   },
-  required: ["type", "commissioner", "version", "options"]
+  required: ["type", "commissioner", "version", "options"],
 };
 
 export const exit = {
@@ -204,16 +197,16 @@ export const exit = {
   properties: {
     type: {
       type: "string",
-      enum: ["exit"]
+      enum: ["exit"],
     },
     version: {
-      type: "string"
-    }
-  }
+      type: "string",
+    },
+  },
 };
 
 export const workerMessage = {
-  oneOf: [https, graphql, jsonrpc, ipfs, exit]
+  oneOf: [https, graphql, jsonrpc, ipfs, exit],
 };
 
 export const config = {
@@ -228,46 +221,46 @@ export const config = {
           type: "object",
           required: ["concurrent"],
           properties: {
-            concurrent: { type: "integer" }
-          }
-        }
-      }
+            concurrent: { type: "integer" },
+          },
+        },
+      },
     },
     endpoints: {
       type: "object",
       propertyNames: {
-        format: "uri"
+        format: "uri",
       },
       patternProperties: {
         "^.*$": {
           type: "object",
           properties: {
             requestsPerUnit: {
-              type: "number"
+              type: "number",
             },
             unit: {
-              enum: ["second", "minute", "hour", "day"]
+              enum: ["second", "minute", "hour", "day"],
             },
             timeout: {
-              type: "number"
-            }
+              type: "number",
+            },
           },
           dependencies: {
             requestsPerUnit: ["unit"],
-            unit: ["requestsPerUnit"]
+            unit: ["requestsPerUnit"],
           },
-          additionalProperties: false
-        }
-      }
-    }
-  }
+          additionalProperties: false,
+        },
+      },
+    },
+  },
 };
 
 export const version = {
   type: "string",
   // Source: https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
   pattern:
-    "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+    "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
 };
 
 // Source: https://eips.ethereum.org/EIPS/eip-721
@@ -275,17 +268,17 @@ export const ERC721Metadata = {
   type: "object",
   properties: {
     name: {
-      type: "string"
+      type: "string",
     },
     description: {
-      type: "string"
+      type: "string",
     },
     image: {
       type: "string",
-      format: "uri"
-    }
+      format: "uri",
+    },
   },
-  required: ["name", "description", "image"]
+  required: ["name", "description", "image"],
 };
 
 export const ERC721 = {
@@ -297,29 +290,29 @@ export const ERC721 = {
         {
           $comment: "Referring to Ethereum block numbers",
           type: "integer",
-          minimum: 0
-        }
-      ]
+          minimum: 0,
+        },
+      ],
     },
     owner: {
       type: "string",
       pattern: "0x[a-fA-F0-9]{40}",
-      $comment: "EIP-173 or EIP-5313 owner of the collection's contract."
+      $comment: "EIP-173 or EIP-5313 owner of the collection's contract.",
     },
     address: {
       type: "string",
-      pattern: "0x[a-fA-F0-9]{40}"
+      pattern: "0x[a-fA-F0-9]{40}",
     },
     tokenId: {
-      type: "string"
+      type: "string",
     },
     tokenURI: {
       type: "string",
-      format: "uri"
+      format: "uri",
     },
     metadata: {
-      ...ERC721Metadata
-    }
+      ...ERC721Metadata,
+    },
   },
   required: [
     "version",
@@ -328,8 +321,8 @@ export const ERC721 = {
     "tokenId",
     "tokenURI",
     "metadata",
-    "owner"
-  ]
+    "owner",
+  ],
 };
 
 export const artist = {
@@ -337,10 +330,10 @@ export const artist = {
   properties: {
     version: { ...version },
     name: {
-      type: "string"
-    }
+      type: "string",
+    },
   },
-  required: ["version", "name"]
+  required: ["version", "name"],
 };
 
 export const platform = {
@@ -348,14 +341,14 @@ export const platform = {
   properties: {
     version: { ...version },
     name: {
-      type: "string"
+      type: "string",
     },
     uri: {
       type: "string",
-      format: "uri"
-    }
+      format: "uri",
+    },
   },
-  required: ["version", "name", "uri"]
+  required: ["version", "name", "uri"],
 };
 
 export const manifestation = {
@@ -364,14 +357,14 @@ export const manifestation = {
     version: { ...version },
     uri: {
       type: "string",
-      format: "uri"
+      format: "uri",
     },
     mimetype: {
       type: "string",
-      pattern: mimetypes
-    }
+      pattern: mimetypes,
+    },
   },
-  required: ["version", "uri", "mimetype"]
+  required: ["version", "uri", "mimetype"],
 };
 
 export const manifestations = {
@@ -381,10 +374,10 @@ export const manifestations = {
     type: "object",
     properties: {
       mimetype: {
-        pattern: "audio"
-      }
-    }
-  }
+        pattern: "audio",
+      },
+    },
+  },
 };
 
 export const track = {
@@ -392,25 +385,25 @@ export const track = {
   properties: {
     version: { ...version },
     title: {
-      type: "string"
+      type: "string",
     },
     duration: {
       // Source for ABNF: https://datatracker.ietf.org/doc/html/rfc3339#appendix-A
       type: "string",
-      format: "duration"
+      format: "duration",
     },
     artist: {
-      ...artist
+      ...artist,
     },
     platform: {
-      ...platform
+      ...platform,
     },
     erc721: {
-      ...ERC721
+      ...ERC721,
     },
     manifestations: {
-      ...manifestations
-    }
+      ...manifestations,
+    },
   },
   required: [
     "manifestations",
@@ -418,8 +411,8 @@ export const track = {
     "title",
     "artist",
     "platform",
-    "erc721"
-  ]
+    "erc721",
+  ],
 };
 
 export const crawlPath = {
@@ -434,8 +427,8 @@ export const crawlPath = {
         extractor: {
           type: "object",
           properties: {
-            args: { type: "array" }
-          }
+            args: { type: "array" },
+          },
         },
         transformer: {
           type: "object",
@@ -444,12 +437,12 @@ export const crawlPath = {
               type: "array",
               minItems: 1,
               items: [{ type: "string" }],
-              additionalItems: true
-            }
-          }
-        }
+              additionalItems: true,
+            },
+          },
+        },
       },
-      required: ["name"]
-    }
-  }
+      required: ["name"],
+    },
+  },
 };
