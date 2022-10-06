@@ -29,13 +29,13 @@ export const https = {
       required: ["url", "method"],
     },
     results: {
-      type: "object",
+      type: "object"
     },
     error: {
-      type: "string",
-    },
+      type: "string"
+    }
   },
-  required: ["type", "commissioner", "version", "options"],
+  required: ["type", "commissioner", "version", "options"]
 };
 
 export const graphql = {
@@ -61,13 +61,13 @@ export const graphql = {
       required: ["url", "body"],
     },
     results: {
-      type: "object",
+      type: "object"
     },
     error: {
-      type: "string",
-    },
+      type: "string"
+    }
   },
-  required: ["type", "commissioner", "version", "options"],
+  required: ["type", "commissioner", "version", "options"]
 };
 
 export const jsonrpc = {
@@ -101,13 +101,13 @@ export const jsonrpc = {
       type: "array",
     },
     results: {
-      type: "object",
+      type: "object"
     },
     error: {
-      type: "string",
-    },
+      type: "string"
+    }
   },
-  required: ["type", "commissioner", "method", "params", "version", "options"],
+  required: ["type", "commissioner", "method", "params", "version", "options"]
 };
 
 export const ipfs = {
@@ -141,11 +141,11 @@ export const ipfs = {
       required: ["uri", "gateway"],
     },
     results: {
-      type: "object",
+      type: "object"
     },
     error: {
-      type: "string",
-    },
+      type: "string"
+    }
   },
   required: ["type", "commissioner", "version", "options"],
 };
@@ -286,13 +286,9 @@ export const ERC721 = {
   properties: {
     version: { ...version },
     createdAt: {
-      oneOf: [
-        {
-          $comment: "Referring to Ethereum block numbers",
-          type: "integer",
-          minimum: 0,
-        },
-      ],
+      $comment: "Referring to Ethereum block numbers",
+      type: "integer",
+      minimum: 0
     },
     owner: {
       type: "string",
