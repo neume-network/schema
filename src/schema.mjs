@@ -104,10 +104,10 @@ export const jsonrpc = {
       type: "object"
     },
     error: {
-      type: "string"
-    }
+      type: "string",
+    },
   },
-  required: ["type", "commissioner", "method", "params", "version", "options"]
+  required: ["type", "commissioner", "method", "params", "version", "options"],
 };
 
 export const ipfs = {
@@ -144,8 +144,8 @@ export const ipfs = {
       type: "object"
     },
     error: {
-      type: "string"
-    }
+      type: "string",
+    },
   },
   required: ["type", "commissioner", "version", "options"],
 };
