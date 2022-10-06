@@ -17,6 +17,7 @@ import {
   config,
   crawlPath,
   ipfs,
+  arweave,
 } from "../src/schema.mjs";
 
 const ajv = new Ajv();
@@ -381,4 +382,19 @@ test("ipfs message url should end with ipfs/", async (t) => {
   const valid = check(message);
   t.false(valid);
   t.true(check.errors[0].instancePath.includes("/options/gateway"));
+});
+
+test("should be a valid arweave message", async (t) => {
+  const check = ajv.compile(arweave);
+  const message = {
+    options: {
+      uri: "ar://ltmVC0dpe7_KxFHj0-S7mdvXSfmcJOec4_OfjwSzLRk/1",
+    },
+    version: "1.0.0",
+    type: "arweave",
+    commissioner: "test",
+  };
+
+  const valid = check(message);
+  t.true(valid);
 });
