@@ -153,6 +153,7 @@ export const ipfs = {
           $comment:
             "Must equate to a regular IPFS path gateway. We had initially considered supporting subdomain gateways too, but a lack of expressing their URIs generically lead us ignore their support.",
         },
+        headers: { type: "object" },
       },
       required: ["uri", "gateway"],
     },
@@ -196,6 +197,7 @@ export const arweave = {
           format: "uri",
           pattern: "^https://",
         },
+        headers: { type: "object" },
       },
       required: ["uri", "gateway"],
     },
