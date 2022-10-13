@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.1
+
+- Add `headers` prop to ipfs and arweave message
+
 ## 0.8.0
 
 - Add `arweave` extraction worker message.
