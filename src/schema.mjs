@@ -301,6 +301,39 @@ export const ERC721Metadata = {
   required: ["name", "description", "image"],
 };
 
+export const token = {
+  type: "object",
+  properties: {
+    minting: {
+      type: "object",
+      properties: {
+        transactionHash: {
+          type: "string",
+          pattern: "0x[a-fA-F0-9]{64}",
+        },
+        minter: {
+          type: "string",
+          pattern: "0x[a-fA-F0-9]{40}",
+        },
+      },
+      required: ["transactionHash", "minter"],
+    },
+    id: {
+      type: "string",
+    },
+    uri: {
+      type: "string",
+      format: "uri",
+    },
+  },
+  required: ["id", "uri", "minter"],
+};
+
+export const tokens = {
+  type: "array",
+  items: token,
+};
+
 export const ERC721 = {
   type: "object",
   properties: {
@@ -319,26 +352,12 @@ export const ERC721 = {
       type: "string",
       pattern: "0x[a-fA-F0-9]{40}",
     },
-    tokenId: {
-      type: "string",
-    },
-    tokenURI: {
-      type: "string",
-      format: "uri",
-    },
+    ...tokens,
     metadata: {
       ...ERC721Metadata,
     },
   },
-  required: [
-    "version",
-    "createdAt",
-    "address",
-    "tokenId",
-    "tokenURI",
-    "metadata",
-    "owner",
-  ],
+  required: ["version", "createdAt", "address", "tokens", "metadata", "owner"],
 };
 
 export const artist = {

@@ -21,11 +21,16 @@
         },
         "name": {
           "type": "string"
+        },
+        "address": {
+          "type": "string",
+          "pattern": "0x[a-fA-F0-9]{40}"
         }
       },
       "required": [
         "version",
-        "name"
+        "name",
+        "address"
       ]
     },
     "platform": {
@@ -70,12 +75,40 @@
           "type": "string",
           "pattern": "0x[a-fA-F0-9]{40}"
         },
-        "tokenId": {
-          "type": "string"
-        },
-        "tokenURI": {
-          "type": "string",
-          "format": "uri"
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "minting": {
+              "type": "object",
+              "properties": {
+                "transactionHash": {
+                  "type": "string",
+                  "pattern": "0x[a-fA-F0-9]{64}"
+                },
+                "minter": {
+                  "type": "string",
+                  "pattern": "0x[a-fA-F0-9]{40}"
+                }
+              },
+              "required": [
+                "transactionHash",
+                "minter"
+              ]
+            },
+            "id": {
+              "type": "string"
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "required": [
+            "id",
+            "uri",
+            "minter"
+          ]
         },
         "metadata": {
           "type": "object",
@@ -102,8 +135,7 @@
         "version",
         "createdAt",
         "address",
-        "tokenId",
-        "tokenURI",
+        "tokens",
         "metadata",
         "owner"
       ]
