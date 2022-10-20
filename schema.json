@@ -29,8 +29,7 @@
       },
       "required": [
         "version",
-        "name",
-        "address"
+        "name"
       ]
     },
     "platform": {
@@ -75,12 +74,47 @@
           "type": "string",
           "pattern": "0x[a-fA-F0-9]{40}"
         },
-        "tokenId": {
-          "type": "string"
-        },
-        "tokenURI": {
-          "type": "string",
-          "format": "uri"
+        "tokens": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "minting": {
+                "type": "object",
+                "properties": {
+                  "transactionHash": {
+                    "type": "string",
+                    "pattern": "0x[a-fA-F0-9]{64}",
+                    "$comment": "The transaction hash that mints the NFT."
+                  },
+                  "from": {
+                    "type": "string",
+                    "pattern": "0x[a-fA-F0-9]{40}",
+                    "$comment": "The address (`from`) that signed the transaction responsible for minting an NFT."
+                  }
+                },
+                "required": [
+                  "transactionHash",
+                  "from"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "$comment": "The id of an NFT, often referred to as `tokenId`."
+              },
+              "uri": {
+                "type": "string",
+                "format": "uri",
+                "$comment": "The uri of an NFT, often referred to as `tokenURI`."
+              }
+            },
+            "required": [
+              "id",
+              "uri",
+              "minting"
+            ]
+          },
+          "minItems": 1
         },
         "metadata": {
           "type": "object",
@@ -107,8 +141,7 @@
         "version",
         "createdAt",
         "address",
-        "tokenId",
-        "tokenURI",
+        "tokens",
         "metadata",
         "owner"
       ]

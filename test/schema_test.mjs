@@ -9,6 +9,8 @@ import {
   version,
   ERC721Metadata,
   ERC721,
+  token,
+  tokens,
   artist,
   platform,
   track,
@@ -57,6 +59,8 @@ test("compile schema", (t) => {
   ajv.compile(version);
   ajv.compile(ERC721Metadata);
   ajv.compile(ERC721);
+  ajv.compile(token);
+  ajv.compile(tokens);
   ajv.compile(artist);
   ajv.compile(platform);
   ajv.compile(track);
@@ -100,7 +104,17 @@ test("failing to define proper duration format", (t) => {
       version,
       createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
-      tokenId: "0",
+      tokens: [
+        {
+          minting: {
+            transactionHash:
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
+            from: "0x0000000000000000000000000000000000001337",
+          },
+          id: "0",
+          uri: "https://example.com/metadata.json",
+        },
+      ],
       metadata: {
         name: "CULTURE",
         description: "song description",
@@ -134,7 +148,16 @@ test("failing to define proper uri format", (t) => {
       version,
       createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
-      tokenId: "0",
+      tokens: [
+        {
+          minting: {
+            transactionHash:
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
+            from: "0x0000000000000000000000000000000000001337",
+          },
+          id: "0",
+        },
+      ],
       metadata: {
         name: "CULTURE",
         description: "song description",
@@ -169,8 +192,17 @@ test("should fail when no manifestation with audio related mimetype is present",
       createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
       owner: "0x0000000000000000000000000000000000001337",
-      tokenId: "0",
-      tokenURI: "https://example.com/metadata.json",
+      tokens: [
+        {
+          minting: {
+            transactionHash:
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
+            from: "0x0000000000000000000000000000000000001337",
+          },
+          id: "0",
+          uri: "https://example.com/metadata.json",
+        },
+      ],
       metadata: {
         name: "CULTURE",
         description: "song description",
@@ -212,8 +244,26 @@ test("validate value", (t) => {
       createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
       owner: "0x0000000000000000000000000000000000001337",
-      tokenId: "0",
-      tokenURI: "https://example.com/metadata.json",
+      tokens: [
+        {
+          minting: {
+            transactionHash:
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
+            from: "0x0000000000000000000000000000000000001337",
+          },
+          id: "0",
+          uri: "https://example.com/metadata.json",
+        },
+        {
+          minting: {
+            transactionHash:
+              "0x0000000000000000000000000000000000000000000000000000000000000001",
+            from: "0x0000000000000000000000000000000000001337",
+          },
+          id: "1",
+          uri: "https://example.com/metadata2.json",
+        },
+      ],
       metadata: {
         name: "CULTURE",
         description: "song description",

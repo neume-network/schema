@@ -301,6 +301,45 @@ export const ERC721Metadata = {
   required: ["name", "description", "image"],
 };
 
+export const token = {
+  type: "object",
+  properties: {
+    minting: {
+      type: "object",
+      properties: {
+        transactionHash: {
+          type: "string",
+          pattern: "0x[a-fA-F0-9]{64}",
+          $comment: "The transaction hash that mints the NFT.",
+        },
+        from: {
+          type: "string",
+          pattern: "0x[a-fA-F0-9]{40}",
+          $comment:
+            "The address (`from`) that signed the transaction responsible for minting an NFT.",
+        },
+      },
+      required: ["transactionHash", "from"],
+    },
+    id: {
+      type: "string",
+      $comment: "The id of an NFT, often referred to as `tokenId`.",
+    },
+    uri: {
+      type: "string",
+      format: "uri",
+      $comment: "The uri of an NFT, often referred to as `tokenURI`.",
+    },
+  },
+  required: ["id", "uri", "minting"],
+};
+
+export const tokens = {
+  type: "array",
+  items: token,
+  minItems: 1,
+};
+
 export const ERC721 = {
   type: "object",
   properties: {
@@ -319,26 +358,14 @@ export const ERC721 = {
       type: "string",
       pattern: "0x[a-fA-F0-9]{40}",
     },
-    tokenId: {
-      type: "string",
-    },
-    tokenURI: {
-      type: "string",
-      format: "uri",
+    tokens: {
+      ...tokens,
     },
     metadata: {
       ...ERC721Metadata,
     },
   },
-  required: [
-    "version",
-    "createdAt",
-    "address",
-    "tokenId",
-    "tokenURI",
-    "metadata",
-    "owner",
-  ],
+  required: ["version", "createdAt", "address", "tokens", "metadata", "owner"],
 };
 
 export const artist = {
