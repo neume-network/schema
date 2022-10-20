@@ -348,8 +348,12 @@ export const artist = {
     name: {
       type: "string",
     },
+    address: {
+      type: "string",
+      pattern: "0x[a-fA-F0-9]{40}",
+    },
   },
-  required: ["version", "name"],
+  required: ["version", "name", "address"],
 };
 
 export const platform = {
