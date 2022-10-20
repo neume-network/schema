@@ -89,6 +89,7 @@ test("failing to define proper duration format", (t) => {
     artist: {
       version,
       name: "latasha",
+      address: "0x0000000000000000000000000000000000000000",
     },
     platform: {
       version,
@@ -122,6 +123,7 @@ test("failing to define proper uri format", (t) => {
     artist: {
       version,
       name: "latasha",
+      address: "0x0000000000000000000000000000000000000000",
     },
     platform: {
       version,
@@ -155,6 +157,7 @@ test("should fail when no manifestation with audio related mimetype is present",
     artist: {
       version,
       name: "latasha",
+      address: "0x0000000000000000000000000000000000000000",
     },
     platform: {
       version,
@@ -197,6 +200,7 @@ test("validate value", (t) => {
     artist: {
       version,
       name: "latasha",
+      address: "0x0000000000000000000000000000000000001234",
     },
     platform: {
       version,
