@@ -353,7 +353,7 @@ export const artist = {
       pattern: "0x[a-fA-F0-9]{40}",
     },
   },
-  required: ["version", "name", "address"],
+  required: ["version", "name"],
 };
 
 export const platform = {
