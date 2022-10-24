@@ -24,7 +24,7 @@ export const https = {
         url: {
           type: "string",
           format: "uri",
-          pattern: "https://",
+          pattern: "^(https|http)://",
         },
         method: { type: "string" },
         body: { type: "string" },
@@ -61,7 +61,7 @@ export const graphql = {
         url: {
           type: "string",
           format: "uri",
-          pattern: "^https://",
+          pattern: "^(https|http)://",
         },
         body: { type: "string" },
         headers: { type: "object" },
@@ -101,7 +101,7 @@ export const jsonrpc = {
         url: {
           type: "string",
           format: "uri",
-          pattern: "^https://",
+          pattern: "^(https|http)://",
         },
       },
       required: ["url"],
@@ -149,7 +149,7 @@ export const ipfs = {
         gateway: {
           type: "string",
           format: "uri",
-          pattern: "^https?://[^/]+/(ip[fn]s)/",
+          pattern: "^(https|http)?://[^/]+/(ip[fn]s)/",
           $comment:
             "Must equate to a regular IPFS path gateway. We had initially considered supporting subdomain gateways too, but a lack of expressing their URIs generically lead us ignore their support.",
         },
@@ -195,7 +195,7 @@ export const arweave = {
         gateway: {
           type: "string",
           format: "uri",
-          pattern: "^https://",
+          pattern: "^(https|http)://",
         },
         headers: { type: "object" },
       },
