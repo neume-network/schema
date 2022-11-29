@@ -3,6 +3,7 @@
   "version": "0.8.1",
   "description": "A JSON schema for music.",
   "main": "./src/schema.mjs",
+  "types": "index.d.ts",
   "directories": {
     "test": "test"
   },
@@ -10,6 +11,7 @@
     "test": "npm run generate:json && ava",
     "prepare": "husky install",
     "generate:json": "node ./scripts/generate.mjs > schema.json",
+    "generate:types": "node ./scripts/generate-types.mjs > index.d.ts",
     "prettier": "prettier --write ."
   },
   "repository": {
@@ -31,12 +33,12 @@
     "url": "https://github.com/neume-network/schema/issues"
   },
   "homepage": "https://github.com/neume-network/schema#readme",
-  "dependencies": {},
   "devDependencies": {
     "ajv": "8.11.0",
     "ajv-formats": "2.1.1",
     "ava": "4.2.0",
     "husky": "7.0.4",
+    "json-schema-to-typescript": "11.0.2",
     "lint-staged": "12.4.0",
     "mime-db": "1.52.0",
     "prettier": "2.6.2"
