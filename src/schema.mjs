@@ -1,6 +1,17 @@
 //@format
 import mimetypes from "./mimetypes.mjs";
 
+export const retry = {
+  type: "object",
+  properties: {
+    retries: {
+      type: "number",
+    },
+  },
+  additionalProperties: false,
+  required: ["retries"],
+};
+
 export const https = {
   type: "object",
   properties: {
@@ -29,6 +40,7 @@ export const https = {
         method: { type: "string" },
         body: { type: "string" },
         headers: { type: "object" },
+        retry,
       },
       required: ["url", "method"],
     },
@@ -65,6 +77,7 @@ export const graphql = {
         },
         body: { type: "string" },
         headers: { type: "object" },
+        retry,
       },
       required: ["url", "body"],
     },
@@ -103,6 +116,7 @@ export const jsonrpc = {
           format: "uri",
           pattern: "^(https|http)://",
         },
+        retry,
       },
       required: ["url"],
     },
@@ -154,6 +168,7 @@ export const ipfs = {
             "Must equate to a regular IPFS path gateway. We had initially considered supporting subdomain gateways too, but a lack of expressing their URIs generically lead us ignore their support.",
         },
         headers: { type: "object" },
+        retry,
       },
       required: ["uri", "gateway"],
     },
@@ -198,6 +213,7 @@ export const arweave = {
           pattern: "^(https|http)://",
         },
         headers: { type: "object" },
+        retry,
       },
       required: ["uri", "gateway"],
     },
@@ -468,8 +484,6 @@ export const all = {
     { $ref: "#/definitions/config" },
     { $ref: "#/definitions/version" },
     { $ref: "#/definitions/ERC721Metadata" },
-    { $ref: "#/definitions/token" },
-    { $ref: "#/definitions/tokens" },
     { $ref: "#/definitions/ERC721" },
     { $ref: "#/definitions/artist" },
     { $ref: "#/definitions/platform" },
@@ -488,8 +502,6 @@ export const all = {
     config,
     version,
     ERC721Metadata,
-    token,
-    tokens,
     ERC721,
     artist,
     platform,
