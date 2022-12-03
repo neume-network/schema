@@ -340,6 +340,9 @@ test("should be a valid ipfs message", async (t) => {
     options: {
       uri: "ipfs://Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu",
       gateway: `https://ipfs.io/ipfs/`,
+      retry: {
+        retries: 5,
+      },
     },
     version: "1.0.0",
     type: "ipfs",

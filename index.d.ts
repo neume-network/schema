@@ -10,10 +10,6 @@ export type Version = string;
 /**
  * @minItems 1
  */
-export type Tokens = [Token, ...Token[]];
-/**
- * @minItems 1
- */
 export type CrawlPath = [
   {
     name: string;
@@ -49,6 +45,9 @@ export interface Https {
     headers?: {
       [k: string]: unknown;
     };
+    retry?: {
+      retries: number;
+    };
     [k: string]: unknown;
   };
   results?: {
@@ -67,6 +66,9 @@ export interface Graphql {
     headers?: {
       [k: string]: unknown;
     };
+    retry?: {
+      retries: number;
+    };
     [k: string]: unknown;
   };
   results?: {
@@ -82,6 +84,9 @@ export interface Jsonrpc {
   options: {
     timeout?: number;
     url: string;
+    retry?: {
+      retries: number;
+    };
     [k: string]: unknown;
   };
   method: string;
@@ -103,6 +108,9 @@ export interface Ipfs {
     headers?: {
       [k: string]: unknown;
     };
+    retry?: {
+      retries: number;
+    };
     [k: string]: unknown;
   };
   results?: {
@@ -121,6 +129,9 @@ export interface Arweave {
     gateway: string;
     headers?: {
       [k: string]: unknown;
+    };
+    retry?: {
+      retries: number;
     };
     [k: string]: unknown;
   };
@@ -162,25 +173,13 @@ export interface ERC721Metadata {
   image: string;
   [k: string]: unknown;
 }
-export interface Token {
-  minting: {
-    transactionHash: string;
-    from: string;
-    [k: string]: unknown;
-  };
-  id: string;
-  uri: string;
-  [k: string]: unknown;
-}
 export interface ERC721 {
   version: string;
   createdAt: number;
   owner: string;
   address: string;
-  /**
-   * @minItems 1
-   */
-  tokens: [Token, ...Token[]];
+  tokenId: string;
+  tokenURI: string;
   metadata: {
     name: string;
     description: string;
@@ -192,7 +191,6 @@ export interface ERC721 {
 export interface Artist {
   version: string;
   name: string;
-  address?: string;
   [k: string]: unknown;
 }
 export interface Platform {
@@ -214,7 +212,6 @@ export interface Track {
   artist: {
     version: string;
     name: string;
-    address?: string;
     [k: string]: unknown;
   };
   platform: {
@@ -228,10 +225,8 @@ export interface Track {
     createdAt: number;
     owner: string;
     address: string;
-    /**
-     * @minItems 1
-     */
-    tokens: [Token, ...Token[]];
+    tokenId: string;
+    tokenURI: string;
     metadata: {
       name: string;
       description: string;
