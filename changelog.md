@@ -1,15 +1,5 @@
 # Changelog
 
-## 0.9.0
-
-- (breaking changes) Add array `track.er721.tokens` with the following fields
-  and requirements:
-  - Move `track.erc721.tokenId` to `track.erc721.tokens[n].id`
-  - Move `track.erc721.tokenURI` to `track.erc721.tokens[n].uri`
-  - Add and require `track.erc721.tokens[n].minting` object containing
-    `minting.transactionHash` and `minting.from`.
-- Add `track.artist.address` as a non-mandatory field
-
 ## 0.8.1
 
 - Add `headers` prop to ipfs and arweave message

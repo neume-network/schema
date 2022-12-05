@@ -9,8 +9,6 @@ import {
   version,
   ERC721Metadata,
   ERC721,
-  token,
-  tokens,
   artist,
   platform,
   track,
@@ -20,9 +18,6 @@ import {
   crawlPath,
   ipfs,
   arweave,
-  graphql,
-  jsonrpc,
-  https,
 } from "../src/schema.mjs";
 
 const ajv = new Ajv();
@@ -62,8 +57,6 @@ test("compile schema", (t) => {
   ajv.compile(version);
   ajv.compile(ERC721Metadata);
   ajv.compile(ERC721);
-  ajv.compile(token);
-  ajv.compile(tokens);
   ajv.compile(artist);
   ajv.compile(platform);
   ajv.compile(track);
@@ -96,7 +89,6 @@ test("failing to define proper duration format", (t) => {
     artist: {
       version,
       name: "latasha",
-      address: "0x0000000000000000000000000000000000000000",
     },
     platform: {
       version,
@@ -107,17 +99,7 @@ test("failing to define proper duration format", (t) => {
       version,
       createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
-      tokens: [
-        {
-          minting: {
-            transactionHash:
-              "0x0000000000000000000000000000000000000000000000000000000000000000",
-            from: "0x0000000000000000000000000000000000001337",
-          },
-          id: "0",
-          uri: "https://example.com/metadata.json",
-        },
-      ],
+      tokenId: "0",
       metadata: {
         name: "CULTURE",
         description: "song description",
@@ -140,7 +122,6 @@ test("failing to define proper uri format", (t) => {
     artist: {
       version,
       name: "latasha",
-      address: "0x0000000000000000000000000000000000000000",
     },
     platform: {
       version,
@@ -151,16 +132,7 @@ test("failing to define proper uri format", (t) => {
       version,
       createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
-      tokens: [
-        {
-          minting: {
-            transactionHash:
-              "0x0000000000000000000000000000000000000000000000000000000000000000",
-            from: "0x0000000000000000000000000000000000001337",
-          },
-          id: "0",
-        },
-      ],
+      tokenId: "0",
       metadata: {
         name: "CULTURE",
         description: "song description",
@@ -183,7 +155,6 @@ test("should fail when no manifestation with audio related mimetype is present",
     artist: {
       version,
       name: "latasha",
-      address: "0x0000000000000000000000000000000000000000",
     },
     platform: {
       version,
@@ -195,17 +166,8 @@ test("should fail when no manifestation with audio related mimetype is present",
       createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
       owner: "0x0000000000000000000000000000000000001337",
-      tokens: [
-        {
-          minting: {
-            transactionHash:
-              "0x0000000000000000000000000000000000000000000000000000000000000000",
-            from: "0x0000000000000000000000000000000000001337",
-          },
-          id: "0",
-          uri: "https://example.com/metadata.json",
-        },
-      ],
+      tokenId: "0",
+      tokenURI: "https://example.com/metadata.json",
       metadata: {
         name: "CULTURE",
         description: "song description",
@@ -235,7 +197,6 @@ test("validate value", (t) => {
     artist: {
       version,
       name: "latasha",
-      address: "0x0000000000000000000000000000000000001234",
     },
     platform: {
       version,
@@ -247,26 +208,8 @@ test("validate value", (t) => {
       createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
       owner: "0x0000000000000000000000000000000000001337",
-      tokens: [
-        {
-          minting: {
-            transactionHash:
-              "0x0000000000000000000000000000000000000000000000000000000000000000",
-            from: "0x0000000000000000000000000000000000001337",
-          },
-          id: "0",
-          uri: "https://example.com/metadata.json",
-        },
-        {
-          minting: {
-            transactionHash:
-              "0x0000000000000000000000000000000000000000000000000000000000000001",
-            from: "0x0000000000000000000000000000000000001337",
-          },
-          id: "1",
-          uri: "https://example.com/metadata2.json",
-        },
-      ],
+      tokenId: "0",
+      tokenURI: "https://example.com/metadata.json",
       metadata: {
         name: "CULTURE",
         description: "song description",
@@ -391,7 +334,7 @@ test.skip("if crawl path validator throws if transformer.args[0] isn't a string"
   t.is(check.errors[0].message, "must be string");
 });
 
-test("should be a valid ipfs message", (t) => {
+test("should be a valid ipfs message", async (t) => {
   const check = ajv.compile(ipfs);
   const message = {
     options: {
@@ -407,7 +350,7 @@ test("should be a valid ipfs message", (t) => {
   t.true(valid);
 });
 
-test("ipfs gateway is a https url", (t) => {
+test("ipfs gateway is a https url", async (t) => {
   const check = ajv.compile(ipfs);
   const message = {
     options: {
@@ -424,7 +367,7 @@ test("ipfs gateway is a https url", (t) => {
   t.true(check.errors[0].instancePath.includes("/options/gateway"));
 });
 
-test("ipfs message url should end with ipfs/", (t) => {
+test("ipfs message url should end with ipfs/", async (t) => {
   const check = ajv.compile(ipfs);
   const message = {
     options: {
@@ -441,7 +384,7 @@ test("ipfs message url should end with ipfs/", (t) => {
   t.true(check.errors[0].instancePath.includes("/options/gateway"));
 });
 
-test("should be a valid arweave message", (t) => {
+test("should be a valid arweave message", async (t) => {
   const check = ajv.compile(arweave);
   const message = {
     options: {
@@ -457,7 +400,7 @@ test("should be a valid arweave message", (t) => {
   t.true(valid);
 });
 
-test("arweave gateway should be a https url", (t) => {
+test("arweave gateway should be a https url", async (t) => {
   const check = ajv.compile(arweave);
   const message = {
     options: {
@@ -471,76 +414,4 @@ test("arweave gateway should be a https url", (t) => {
 
   const invalid = check(message);
   t.falsy(invalid);
-});
-
-test("that all worker messages allow local (gateway) uris starting with 'http'", (t) => {
-  const c1 = ajv.compile(arweave);
-  const m1 = {
-    options: {
-      uri: "ar://ltmVC0dpe7_KxFHj0-S7mdvXSfmcJOec4_OfjwSzLRk/1",
-      gateway: "http://localhost",
-    },
-    version: "1.0.0",
-    type: "arweave",
-    commissioner: "test",
-  };
-  const r1 = c1(m1);
-  t.true(r1);
-
-  const c2 = ajv.compile(ipfs);
-  const m2 = {
-    options: {
-      uri: "ipfs://Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu",
-      gateway: "http://localhost/ipfs/",
-    },
-    version: "1.0.0",
-    type: "ipfs",
-    commissioner: "test",
-  };
-
-  const r2 = c2(m2);
-  t.true(r2);
-
-  const c3 = ajv.compile(graphql);
-  const m3 = {
-    options: {
-      url: "http://localhost",
-      body: "abc",
-    },
-    version: "1.0.0",
-    type: "graphql",
-    commissioner: "test",
-  };
-
-  const r3 = c3(m3);
-  t.true(r3);
-
-  const c4 = ajv.compile(https);
-  const m4 = {
-    options: {
-      url: "http://localhost",
-      method: "GET",
-    },
-    version: "1.0.0",
-    type: "https",
-    commissioner: "test",
-  };
-
-  const r4 = c4(m4);
-  t.true(r4);
-
-  const c5 = ajv.compile(jsonrpc);
-  const m5 = {
-    options: {
-      url: "http://localhost",
-    },
-    method: "eth_call",
-    version: "1.0.0",
-    type: "json-rpc",
-    params: [],
-    commissioner: "test",
-  };
-
-  const r5 = c5(m5);
-  t.true(r5);
 });
