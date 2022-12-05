@@ -3,3 +3,4 @@
 
 npx lint-staged
 npm run generate:json
+npm run generate:types
