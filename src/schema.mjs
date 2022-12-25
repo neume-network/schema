@@ -35,7 +35,7 @@ export const https = {
         url: {
           type: "string",
           format: "uri",
-          pattern: "https://",
+          pattern: "^https?://",
         },
         method: { type: "string" },
         body: { type: "string" },
