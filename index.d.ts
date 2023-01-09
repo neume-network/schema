@@ -191,6 +191,7 @@ export interface ERC721 {
 export interface Artist {
   version: string;
   name: string;
+  address?: string;
   [k: string]: unknown;
 }
 export interface Platform {
@@ -212,6 +213,7 @@ export interface Track {
   artist: {
     version: string;
     name: string;
+    address?: string;
     [k: string]: unknown;
   };
   platform: {
