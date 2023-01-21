@@ -65,11 +65,6 @@
           "type": "integer",
           "minimum": 0
         },
-        "owner": {
-          "type": "string",
-          "pattern": "0x[a-fA-F0-9]{40}",
-          "$comment": "EIP-173 or EIP-5313 owner of the collection's contract."
-        },
         "address": {
           "type": "string",
           "pattern": "0x[a-fA-F0-9]{40}"
@@ -80,6 +75,37 @@
         "tokenURI": {
           "type": "string",
           "format": "uri"
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$comment": "History of EIP 721 transfer events",
+            "properties": {
+              "from": {
+                "type": "string",
+                "pattern": "0x[a-fA-F0-9]{40}"
+              },
+              "to": {
+                "type": "string",
+                "pattern": "0x[a-fA-F0-9]{40}"
+              },
+              "blockNumber": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "transactionHash": {
+                "type": "string",
+                "pattern": "0x[a-fA-F0-9]{64}"
+              }
+            },
+            "required": [
+              "from",
+              "to",
+              "blockNumber",
+              "transactionHash"
+            ]
+          }
         },
         "metadata": {
           "type": "object",
@@ -109,7 +135,7 @@
         "tokenId",
         "tokenURI",
         "metadata",
-        "owner"
+        "transactions"
       ]
     },
     "manifestations": {
