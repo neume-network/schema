@@ -317,30 +317,6 @@ export const ERC721Metadata = {
   required: ["name", "description", "image"],
 };
 
-export const transaction = {
-  type: "object",
-  $comment: "History of EIP 721 transfer events",
-  properties: {
-    from: {
-      type: "string",
-      pattern: "0x[a-fA-F0-9]{40}",
-    },
-    to: {
-      type: "string",
-      pattern: "0x[a-fA-F0-9]{40}",
-    },
-    blockNumber: {
-      type: "integer",
-      minimum: 0,
-    },
-    transactionHash: {
-      type: "string",
-      pattern: "0x[a-fA-F0-9]{64}",
-    },
-  },
-  required: ["from", "to", "blockNumber", "transactionHash"],
-};
-
 export const ERC721 = {
   type: "object",
   properties: {
@@ -349,6 +325,11 @@ export const ERC721 = {
       $comment: "Referring to Ethereum block numbers",
       type: "integer",
       minimum: 0,
+    },
+    owner: {
+      type: "string",
+      pattern: "0x[a-fA-F0-9]{40}",
+      $comment: "EIP-173 or EIP-5313 owner of the collection's contract.",
     },
     address: {
       type: "string",
@@ -361,10 +342,6 @@ export const ERC721 = {
       type: "string",
       format: "uri",
     },
-    transactions: {
-      type: "array",
-      items: transaction,
-    },
     metadata: {
       ...ERC721Metadata,
     },
@@ -376,7 +353,7 @@ export const ERC721 = {
     "tokenId",
     "tokenURI",
     "metadata",
-    "transactions",
+    "owner",
   ],
 };
 
@@ -517,7 +494,6 @@ export const all = {
     { $ref: "#/definitions/manifestation" },
     { $ref: "#/definitions/track" },
     { $ref: "#/definitions/crawlPath" },
-    { $ref: "#/definitions/transaction" },
   ],
   definitions: {
     https,
@@ -536,6 +512,5 @@ export const all = {
     manifestation,
     track,
     crawlPath,
-    transaction,
   },
 };

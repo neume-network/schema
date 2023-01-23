@@ -176,23 +176,16 @@ export interface ERC721Metadata {
 export interface ERC721 {
   version: string;
   createdAt: number;
+  owner: string;
   address: string;
   tokenId: string;
   tokenURI: string;
-  transactions: Transaction[];
   metadata: {
     name: string;
     description: string;
     image: string;
     [k: string]: unknown;
   };
-  [k: string]: unknown;
-}
-export interface Transaction {
-  from: string;
-  to: string;
-  blockNumber: number;
-  transactionHash: string;
   [k: string]: unknown;
 }
 export interface Artist {
@@ -232,10 +225,10 @@ export interface Track {
   erc721: {
     version: string;
     createdAt: number;
+    owner: string;
     address: string;
     tokenId: string;
     tokenURI: string;
-    transactions: Transaction[];
     metadata: {
       name: string;
       description: string;
