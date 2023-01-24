@@ -176,7 +176,13 @@ export interface ERC721Metadata {
 export interface ERC721 {
   version: string;
   createdAt: number;
-  owner: string;
+  transaction: {
+    from: string;
+    to: string;
+    blockNumber: number;
+    transactionHash: string;
+    [k: string]: unknown;
+  };
   address: string;
   tokenId: string;
   tokenURI: string;
@@ -225,7 +231,13 @@ export interface Track {
   erc721: {
     version: string;
     createdAt: number;
-    owner: string;
+    transaction: {
+      from: string;
+      to: string;
+      blockNumber: number;
+      transactionHash: string;
+      [k: string]: unknown;
+    };
     address: string;
     tokenId: string;
     tokenURI: string;
@@ -238,6 +250,13 @@ export interface Track {
     [k: string]: unknown;
   };
   manifestations: Manifestation[];
+  [k: string]: unknown;
+}
+export interface Transaction {
+  from: string;
+  to: string;
+  blockNumber: number;
+  transactionHash: string;
   [k: string]: unknown;
 }
 

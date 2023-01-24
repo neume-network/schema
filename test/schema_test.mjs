@@ -18,6 +18,7 @@ import {
   crawlPath,
   ipfs,
   arweave,
+  transaction,
 } from "../src/schema.mjs";
 
 const ajv = new Ajv();
@@ -64,6 +65,7 @@ test("compile schema", (t) => {
   ajv.compile(manifestations);
   ajv.compile(config);
   ajv.compile(crawlPath);
+  ajv.compile(transaction);
   t.pass();
 });
 
@@ -168,7 +170,13 @@ test("should fail when no manifestation with audio related mimetype is present",
       version,
       createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
-      owner: "0x0000000000000000000000000000000000001337",
+      transaction: {
+        from: "0x0000000000000000000000000000000000000000",
+        to: "0x0000000000000000000000000000000000000000",
+        transactionHash:
+          "0x28b5107ef960dc9c9199f4adf8ff4142b9d53f2cbcab9552b1e492593a3aeadb",
+        blockNumber: 0,
+      },
       tokenId: "0",
       tokenURI: "https://example.com/metadata.json",
       metadata: {
@@ -211,7 +219,13 @@ test("validate value", (t) => {
       version,
       createdAt: 123,
       address: "0x0000000000000000000000000000000000000000",
-      owner: "0x0000000000000000000000000000000000001337",
+      transaction: {
+        from: "0x0000000000000000000000000000000000000000",
+        to: "0x0000000000000000000000000000000000000000",
+        transactionHash:
+          "0x28b5107ef960dc9c9199f4adf8ff4142b9d53f2cbcab9552b1e492593a3aeadb",
+        blockNumber: 0,
+      },
       tokenId: "0",
       tokenURI: "https://example.com/metadata.json",
       metadata: {
