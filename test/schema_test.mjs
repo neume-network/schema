@@ -18,7 +18,6 @@ import {
   crawlPath,
   ipfs,
   arweave,
-  transaction,
 } from "../src/schema.mjs";
 
 const ajv = new Ajv();
@@ -65,7 +64,6 @@ test("compile schema", (t) => {
   ajv.compile(manifestations);
   ajv.compile(config);
   ajv.compile(crawlPath);
-  ajv.compile(transaction);
   t.pass();
 });
 
@@ -87,6 +85,7 @@ test("failing to define proper duration format", (t) => {
   const example = {
     version,
     title: "CULTURE",
+    uid: "uid",
     duration: "invalid duration",
     artist: {
       version,
@@ -99,10 +98,7 @@ test("failing to define proper duration format", (t) => {
       uri: "https://sound.xyz",
     },
     erc721: {
-      version,
-      createdAt: 123,
-      address: "0x0000000000000000000000000000000000000000",
-      tokenId: "0",
+      tokens: [],
       metadata: {
         name: "CULTURE",
         description: "song description",
@@ -121,6 +117,7 @@ test("failing to define proper uri format", (t) => {
   const example = {
     version,
     title: "CULTURE",
+    uid: "uid",
     duration: "PT3M",
     artist: {
       version,
@@ -134,9 +131,8 @@ test("failing to define proper uri format", (t) => {
     },
     erc721: {
       version,
-      createdAt: 123,
-      address: "0x0000000000000000000000000000000000000000",
-      tokenId: "0",
+      uri: "false formatting",
+      tokens: [],
       metadata: {
         name: "CULTURE",
         description: "song description",
@@ -153,32 +149,16 @@ test("should fail when no manifestation with audio related mimetype is present",
   const check = ajv.compile(track);
   const version = "0.0.1";
   const example = {
-    version,
-    title: "CULTURE",
-    duration: "PT2M1S",
-    artist: {
-      version,
-      name: "latasha",
-      address: "0x0000000000000000000000000000000000000000",
-    },
-    platform: {
-      version,
-      name: "Sound",
-      uri: "https://www.sound.xyz",
-    },
+    version: "1.0.0",
+    title: "Blast",
+    uid: "polygon/106643/194",
+    duration: "PT05S",
+    artist: { version: "1.0.0", name: "jburn.lens", address: "106643" },
+    platform: { version: "1.0.0", name: "Lens", uri: "https://lens.xyz" },
     erc721: {
-      version,
-      createdAt: 123,
-      address: "0x0000000000000000000000000000000000000000",
-      transaction: {
-        from: "0x0000000000000000000000000000000000000000",
-        to: "0x0000000000000000000000000000000000000000",
-        transactionHash:
-          "0x28b5107ef960dc9c9199f4adf8ff4142b9d53f2cbcab9552b1e492593a3aeadb",
-        blockNumber: 0,
-      },
-      tokenId: "0",
-      tokenURI: "https://example.com/metadata.json",
+      version: "1.0.0",
+      tokens: [],
+      address: "0xe8ebad85fe7eb36ed5b6f12ac95048c7d9bff15b",
       metadata: {
         name: "CULTURE",
         description: "song description",
@@ -198,52 +178,88 @@ test("should fail when no manifestation with audio related mimetype is present",
   t.false(valid);
 });
 
-test("validate value", (t) => {
+test("should be a valid track schema", (t) => {
   const check = ajv.compile(track);
-  const version = "0.0.1";
   const example = {
-    version,
-    title: "CULTURE",
-    duration: "PT2M1S",
-    artist: {
-      version,
-      name: "latasha",
-      address: "0x0000000000000000000000000000000000001234",
-    },
-    platform: {
-      version,
-      name: "Sound",
-      uri: "https://www.sound.xyz",
-    },
+    version: "1.0.0",
+    title: "Blast",
+    uid: "polygon/106643/194",
+    duration: "PT05S",
+    artist: { version: "1.0.0", name: "jburn.lens", address: "106643" },
+    platform: { version: "1.0.0", name: "Lens", uri: "https://lens.xyz" },
     erc721: {
-      version,
-      createdAt: 123,
-      address: "0x0000000000000000000000000000000000000000",
-      transaction: {
-        from: "0x0000000000000000000000000000000000000000",
-        to: "0x0000000000000000000000000000000000000000",
-        transactionHash:
-          "0x28b5107ef960dc9c9199f4adf8ff4142b9d53f2cbcab9552b1e492593a3aeadb",
-        blockNumber: 0,
-      },
-      tokenId: "0",
-      tokenURI: "https://example.com/metadata.json",
+      version: "1.0.0",
+      tokens: [
+        {
+          id: "1",
+          uri: null,
+          metadata: null,
+          owners: [
+            {
+              from: "0x0000000000000000000000000000000000000000",
+              to: "0x77a395A6f7c6E91192697Abb207ea3c171F4B338",
+              blockNumber: 41988367,
+              transactionHash:
+                "0xd622364913527f2d19ac5a09cba872df88a1bc8d37661bccac98ec2d38130787",
+              alias: "n0madz.lens",
+            },
+          ],
+        },
+      ],
+      address: "0xe8ebad85fe7eb36ed5b6f12ac95048c7d9bff15b",
       metadata: {
-        name: "CULTURE",
-        description: "song description",
-        image: "https://example.com/image.jpg",
+        version: "2.0.0",
+        metadata_id: "dfa5863d-b325-47f4-93c7-d8af3d12e48e",
+        content:
+          "1 Wmatic to collect\n" +
+          "25% referral reward\n" +
+          "Nonexclusive Unlimited Usage Rights for owners\n" +
+          "\n" +
+          "Thanks everyone for the support on the beats lately, its been inspirational.",
+        external_url: "https://beatsapp.xyz/profile/jburn.lens",
+        image:
+          "ipfs://bafybeieiuz7xqlrs4aq7gfd3h2ttkt5sjjw43dm57xk3cmpneeiadql4qa",
+        imageMimeType: "image/png",
+        name: "Blast",
+        tags: ["Song", ""],
+        animation_url:
+          "ipfs://bafybeifgvqlonwa3m3rzgdzdix34ob57bap56fmiypsujewm74jruoonli",
+        mainContentFocus: "AUDIO",
+        contentWarning: null,
+        attributes: [
+          { traitType: "type", displayType: "string", value: "audio" },
+          { traitType: "genre", displayType: "string", value: "" },
+          { traitType: "author", displayType: "string", value: "Jburn" },
+        ],
+        media: [
+          {
+            type: "audio/mpeg",
+            altTag: "Audio file",
+            item: "ipfs://bafybeifgvqlonwa3m3rzgdzdix34ob57bap56fmiypsujewm74jruoonli",
+          },
+        ],
+        locale: "en",
+        appId: "beats",
+        description:
+          "1 Wmatic to collect\n" +
+          "25% referral reward\n" +
+          "Nonexclusive Unlimited Usage Rights for owners\n" +
+          "\n" +
+          "Thanks everyone for the support on the beats lately, its been inspirational.",
       },
     },
     manifestations: [
       {
-        version,
-        uri: "https://example.com/audio",
-        mimetype: "audio/mp3",
+        version: "1.0.0",
+        uri: "ipfs://bafybeieiuz7xqlrs4aq7gfd3h2ttkt5sjjw43dm57xk3cmpneeiadql4qa",
+        mimetype: "image",
+        uid: "polygon/106643/194",
       },
       {
-        version,
-        uri: "https://example.com/video",
-        mimetype: "video/mp4",
+        version: "1.0.0",
+        uri: "ipfs://bafybeifgvqlonwa3m3rzgdzdix34ob57bap56fmiypsujewm74jruoonli",
+        mimetype: "audio",
+        uid: "polygon/106643/194",
       },
     ],
   };

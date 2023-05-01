@@ -301,7 +301,7 @@ export const version = {
 
 // Source: https://eips.ethereum.org/EIPS/eip-721
 export const ERC721Metadata = {
-  type: "object",
+  type: ["object", "null"],
   properties: {
     name: {
       type: "string",
@@ -317,9 +317,9 @@ export const ERC721Metadata = {
   required: ["name", "description", "image"],
 };
 
-export const transaction = {
+export const owner = {
   type: "object",
-  $comment: "History of EIP 721 transfer events",
+  $comment: "Owner of the track",
   properties: {
     from: {
       type: "string",
@@ -337,46 +337,67 @@ export const transaction = {
       type: "string",
       pattern: "0x[a-fA-F0-9]{64}",
     },
+    alias: {
+      type: ["string", "null"],
+      $comment: "Alias for address. For example, ENS.",
+    },
   },
   required: ["from", "to", "blockNumber", "transactionHash"],
+};
+
+export const owners = {
+  type: "array",
+  items: owner,
+};
+
+export const token = {
+  type: "object",
+  properties: {
+    id: {
+      type: "string",
+    },
+    uri: {
+      type: ["string", "null"],
+    },
+    metadata: {
+      ...ERC721Metadata,
+    },
+    owners: {
+      ...owners,
+    },
+  },
+  required: ["id", "owners"],
+};
+
+export const tokens = {
+  type: "array",
+  items: token,
 };
 
 export const ERC721 = {
   type: "object",
   properties: {
     version: { ...version },
-    createdAt: {
-      $comment: "Referring to Ethereum block numbers",
-      type: "integer",
-      minimum: 0,
-    },
-    transaction: {
-      ...transaction,
+    tokens: {
+      ...tokens,
     },
     address: {
+      $comment: "The address where the NFTs are minted",
       type: "string",
       pattern: "0x[a-fA-F0-9]{40}",
     },
-    tokenId: {
-      type: "string",
-    },
-    tokenURI: {
-      type: "string",
-      format: "uri",
+    uri: {
+      $comment:
+        "tokenURI where the metadata was found. Similar to metadata, if tokenURI is common for all tokens we can use this field.",
+      type: ["string", "null"],
     },
     metadata: {
+      $comment:
+        "If the metadata is same for all the tokens we can use this field",
       ...ERC721Metadata,
     },
   },
-  required: [
-    "version",
-    "createdAt",
-    "address",
-    "tokenId",
-    "tokenURI",
-    "metadata",
-    "transaction",
-  ],
+  required: ["version", "tokens", "address"],
 };
 
 export const artist = {
@@ -388,7 +409,6 @@ export const artist = {
     },
     address: {
       type: "string",
-      pattern: "0x[a-fA-F0-9]{40}",
     },
   },
   required: ["version", "name"],
@@ -446,6 +466,10 @@ export const track = {
     title: {
       type: "string",
     },
+    uid: {
+      $comment: "Unique ID to identify the track",
+      type: "string",
+    },
     duration: {
       // Source for ABNF: https://datatracker.ietf.org/doc/html/rfc3339#appendix-A
       type: "string",
@@ -471,6 +495,7 @@ export const track = {
     "artist",
     "platform",
     "erc721",
+    "uid",
   ],
 };
 
@@ -516,7 +541,10 @@ export const all = {
     { $ref: "#/definitions/manifestation" },
     { $ref: "#/definitions/track" },
     { $ref: "#/definitions/crawlPath" },
-    { $ref: "#/definitions/transaction" },
+    { $ref: "#/definitions/owner" },
+    { $ref: "#/definitions/owners" },
+    { $ref: "#/definitions/token" },
+    { $ref: "#/definitions/tokens" },
   ],
   definitions: {
     https,
@@ -535,6 +563,9 @@ export const all = {
     manifestation,
     track,
     crawlPath,
-    transaction,
+    owner,
+    owners,
+    token,
+    tokens,
   },
 };
