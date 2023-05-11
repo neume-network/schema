@@ -7,6 +7,18 @@
 
 export type WorkerMessage = Https | Graphql | Jsonrpc | Ipfs | Arweave | Exit;
 export type Version = string;
+export type ERC721Metadata = {
+  name: string;
+  description: string;
+  image: string;
+  [k: string]: unknown;
+} & ERC721Metadata1;
+export type ERC721Metadata1 = {
+  name: string;
+  description: string;
+  image: string;
+  [k: string]: unknown;
+} | null;
 /**
  * @minItems 1
  */
@@ -32,6 +44,8 @@ export type CrawlPath = [
     [k: string]: unknown;
   }[][]
 ];
+export type Owners = Owner[];
+export type Tokens = Token[];
 
 export interface Https {
   type: "https";
@@ -167,31 +181,37 @@ export interface Config {
   };
   [k: string]: unknown;
 }
-export interface ERC721Metadata {
-  name: string;
-  description: string;
-  image: string;
-  [k: string]: unknown;
-}
 export interface ERC721 {
   version: string;
-  createdAt: number;
-  transaction: {
-    from: string;
-    to: string;
-    blockNumber: number;
-    transactionHash: string;
-    [k: string]: unknown;
-  };
+  tokens: Token[];
   address: string;
-  tokenId: string;
-  tokenURI: string;
-  metadata: {
+  uri?: string | null;
+  metadata?: {
     name: string;
     description: string;
     image: string;
     [k: string]: unknown;
-  };
+  } | null;
+  [k: string]: unknown;
+}
+export interface Token {
+  id: string;
+  uri?: string | null;
+  metadata?: {
+    name: string;
+    description: string;
+    image: string;
+    [k: string]: unknown;
+  } | null;
+  owners: Owner[];
+  [k: string]: unknown;
+}
+export interface Owner {
+  from: string;
+  to: string;
+  blockNumber: number;
+  transactionHash: string;
+  alias?: string | null;
   [k: string]: unknown;
 }
 export interface Artist {
@@ -215,6 +235,7 @@ export interface Manifestation {
 export interface Track {
   version: string;
   title: string;
+  uid: string;
   duration?: string;
   artist: {
     version: string;
@@ -230,33 +251,17 @@ export interface Track {
   };
   erc721: {
     version: string;
-    createdAt: number;
-    transaction: {
-      from: string;
-      to: string;
-      blockNumber: number;
-      transactionHash: string;
-      [k: string]: unknown;
-    };
+    tokens: Token[];
     address: string;
-    tokenId: string;
-    tokenURI: string;
-    metadata: {
+    uri?: string | null;
+    metadata?: {
       name: string;
       description: string;
       image: string;
       [k: string]: unknown;
-    };
+    } | null;
     [k: string]: unknown;
   };
   manifestations: Manifestation[];
   [k: string]: unknown;
 }
-export interface Transaction {
-  from: string;
-  to: string;
-  blockNumber: number;
-  transactionHash: string;
-  [k: string]: unknown;
-}
-
